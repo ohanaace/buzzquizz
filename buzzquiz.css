@@ -71,7 +71,7 @@ main > section > span{
 
 main > section > div{
     display: flex;
-
+    justify-content: center;
     flex-wrap: wrap;
 }
 .cards{
