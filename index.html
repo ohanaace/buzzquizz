@@ -1,17 +1,80 @@
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <title>BuzzQuizz</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="buzzquiz.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container"> <!--tela 2 - tela de um quiz-->
+    <header>BuzzQuiz</header>
+    <main>
+        <section class="criar-quiz">
+            <span>Você não criou nenhum quizz ainda :(</span>
+            <button onclick="criarQuizzInfo()">Criar Quizz</button>
+        </section>
+        <section class="seu-quizzes">
+            <span>Seus Quizzes</span>
+            <div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+            </div>
+        </section>
+        <section class="outros-quizzes">
+            <span>Todos os Quizzes</span>
+            <div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+                <div class="cards">
+                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="container escondido"> <!--tela 2 - tela de um quiz-->
         <header>
             <h1 class="titulo-buzzquiz"> BuzzQuizz</h1> 
         </header>
@@ -60,8 +123,21 @@
 
         </div>
 
-    </div> <!--fim da classe container-->
+    </div> <!--fim da classe container com a tela 2-->
+    <div class="info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
+        <div>
+            Comece pelo começo
+        </div>
+        <div>
+            <input type="text" placeholder="Título do seu quizz">
+            <input type="text" placeholder="URL da imagem do seu quizz">
+            <input type="text" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <button onclick="alert('em breve')">Prosseguir pra criar perguntas</button>
+    </div> <!-- final tela 3.1 informações básicas do quizz -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="buzzquiz.js"></script>
 </body>
+
 </html>

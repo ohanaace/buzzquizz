@@ -1,8 +1,26 @@
-body{
-    font-family: 'Roboto', sans-serif;
-}
-*{
+* {
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FAFAFA;
+}
+
+header {
+    font-size: 37px;
+    font-weight: 700;
+    color: #FFFFFF;
+    width: 100%;
+    height: 70px;
+    background-color: #EC362D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .container{
     width: 100%;
@@ -12,22 +30,180 @@ body{
     align-items: center;
     margin-top: 69px;
 }
-.titulo-buzzquiz{
-    font-weight: 700;
-    font-size: 37px;
-    color: #ffffff;
+.escondido {
+    display: none;
 }
-header{
-    background-color: #ec362d;
-    width: 100%;
-    height: 69px;
+
+
+main {
     display: flex;
-   align-items: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 0 0 0;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+main>section {
+    width: 80%;
+    min-width: 350px;
+    margin: 20px 0;
+    max-width: 1050px;
+}
+
+.criar-quiz {
+    min-height: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
+    font-weight: 400;
+    background: #FAFAFA;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+}
+
+.criar-quiz>span {
+    font-size: 20px;
+    text-align: center;
+    width: 250px;
+    color: #B9B9B9;
+    margin: 25px;
+}
+
+.criar-quiz>button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 21px;
+    color: #EC362D;
+    text-align: center;
+    background: #FAFAFA;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+}
+
+main>section>span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+main>section>div {
+    display: flex;
+
+    flex-wrap: wrap;
+}
+
+.cards {
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65%, #000000 100%), url(img/1295304.jpg);
+    background-size: contain;
+    width: 340px;
+    height: 180px;
+    margin: 15px 5px 0 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.cards>span {
+    color: white;
+    font-size: 19px;
+    font-weight: 400;
+    position: absolute;
+    width: 300px;
+    bottom: 8px;
+    left: 20px;
+    margin: auto;
+}
+
+
+
+/* inicio tela 3 */
+
+
+
+.info {
+    /* tela de informações básicas do quizz */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 141px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.info>:nth-child(1) {
+    /* titulo da etapa de criação do quizz */
+    width: 224px;
+    height: 27px;
+    margin-bottom: 27px;
+
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+.info>:nth-child(2) {
+    /* div com 4 inputs */
+    width: 600px;
+    height: 256px;
+    margin-bottom: 85px;
+    padding-top: 21px;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info input {
+    /* inputs da div acima */
+
+    width: 564px;
+    height: 46px;
+    margin-bottom: 9px;
+    padding-left: 23px;
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.info input,
+.info input::placeholder {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+}
+
+.info input::placeholder {
+    font-style: italic;
+
+    color: #BABABA;
+}
+
+.info button {
+    /* botão para proxima etapa */
+    width: 368.86px;
+    height: 54px;
+
+    background: #EC362D;
+    border-radius: 15px;
+
+    font-weight: 400;
+    font-size: 21px;
+
+    color: #FFF5F4;
+}
+
 }
 .banner{
     display: flex;
@@ -150,6 +326,29 @@ button:hover{
     cursor: pointer;
 }
 
+@media (max-width: 375px) {
+
+    .info,
+    .info>div,
+    .info>:nth-child(2) {
+        width: 100%;
+    }
+
+    .info input {
+        width: 91%;
+        padding-left: 14px;
+    }
+
+    .info button {
+        width: 86.5%;
+    }
+
+    .info>:nth-child(1) {
+        font-size: 20;
+        line-height: 23;
+        justify-content: center;
+    }
+}
 
 @media(max-width: 1100px){
     .quiz,
