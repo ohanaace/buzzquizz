@@ -106,8 +106,11 @@ main>section>div {
 
 /* inicio tela 3 */
 
+
+
 .info {
     /* tela de informações básicas do quizz */
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 141px;
@@ -132,7 +135,6 @@ main>section>div {
     align-items: center;
 
     color: #000000;
-    background-color: white;
 }
 
 .info>:nth-child(2) {
@@ -188,6 +190,30 @@ main>section>div {
     font-size: 21px;
 
     color: #FFF5F4;
+}
+
+@media (max-width: 375px) {
+
+    .info,
+    .info>div,
+    .info>:nth-child(2) {
+        width: 100%;
+    }
+
+    .info input {
+        width: 91%;
+        padding-left: 14px;
+    }
+
+    .info button {
+        width: 86.5%;
+    }
+
+    .info>:nth-child(1) {
+        font-size: 20;
+        line-height: 23;
+        justify-content: center;
+    }
 }
 
 .escondido {
