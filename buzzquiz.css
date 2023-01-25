@@ -1,12 +1,13 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Roboto', sans-serif;
     background-color: #FAFAFA;
 }
 
-header{
+header {
     font-size: 37px;
     font-weight: 700;
     color: #FFFFFF;
@@ -22,7 +23,7 @@ header{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,13 +31,15 @@ main{
     height: 100%;
     overflow-y: scroll;
 }
-main > section{
+
+main>section {
     width: 80%;
     min-width: 350px;
     margin: 20px 0;
     max-width: 1050px;
 }
-.criar-quiz{
+
+.criar-quiz {
     min-height: 180px;
     height: 180px;
     display: flex;
@@ -48,14 +51,16 @@ main > section{
     border: 1px dashed #D5D5D5;
     border-radius: 5px;
 }
-.criar-quiz > span{
+
+.criar-quiz>span {
     font-size: 20px;
     text-align: center;
     width: 250px;
     color: #B9B9B9;
     margin: 25px;
 }
-.criar-quiz > button{
+
+.criar-quiz>button {
     font-family: 'Roboto', sans-serif;
     font-size: 21px;
     color: #EC362D;
@@ -64,17 +69,19 @@ main > section{
     border: 1px dashed #EC362D;
     border-radius: 50px;
 }
-main > section > span{
+
+main>section>span {
     font-size: 20px;
     font-weight: 700;
 }
 
-main > section > div{
+main>section>div {
     display: flex;
 
     flex-wrap: wrap;
 }
-.cards{
+
+.cards {
     background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65%, #000000 100%), url(img/1295304.jpg);
     background-size: contain;
     width: 340px;
@@ -83,7 +90,8 @@ main > section > div{
     border-radius: 5px;
     position: relative;
 }
-.cards > span{
+
+.cards>span {
     color: white;
     font-size: 19px;
     font-weight: 400;
@@ -94,7 +102,94 @@ main > section > div{
     margin: auto;
 }
 
-.escondido{
-    display: none;
+
+
+/* inicio tela 3 */
+
+.info {
+    /* tela de informações básicas do quizz */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 141px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+
+.info>:nth-child(1) {
+    /* titulo da etapa de criação do quizz */
+    width: 224px;
+    height: 27px;
+    margin-bottom: 27px;
+
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+    background-color: white;
+}
+
+.info>:nth-child(2) {
+    /* div com 4 inputs */
+    width: 600px;
+    height: 256px;
+    margin-bottom: 85px;
+    padding-top: 21px;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info input {
+    /* inputs da div acima */
+
+    width: 564px;
+    height: 46px;
+    margin-bottom: 9px;
+    padding-left: 23px;
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.info input,
+.info input::placeholder {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+}
+
+.info input::placeholder {
+    font-style: italic;
+
+    color: #BABABA;
+}
+
+.info button {
+    /* botão para proxima etapa */
+    width: 368.86px;
+    height: 54px;
+
+    background: #EC362D;
+    border-radius: 15px;
+
+    font-weight: 400;
+    font-size: 21px;
+
+    color: #FFF5F4;
+}
+
+.escondido {
+    display: none;
+}

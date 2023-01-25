@@ -1,21 +1,24 @@
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <title>BuzzQuiz</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="buzzquiz.css">
 </head>
+
 <body>
     <header>BuzzQuiz</header>
     <main>
         <section class="criar-quiz">
             <span>Você não criou nenhum quizz ainda :(</span>
-            <button>Criar Quizz</button>
+            <button onclick="criarQuizzInfo()">Criar Quizz</button>
         </section>
         <section class="seu-quizzes">
             <span>Seus Quizzes</span>
@@ -70,7 +73,20 @@
             </div>
         </section>
     </main>
+    <div class="info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
+        <div>
+            Comece pelo começo
+        </div>
+        <div>
+            <input type="text" placeholder="Título do seu quizz">
+            <input type="text" placeholder="URL da imagem do seu quizz">
+            <input type="text" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <button onclick="alert('em breve')">Prosseguir pra criar perguntas</button>
+    </div> <!-- final tela 3.1 informações básicas do quizz -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="buzzquiz.js"></script>
 </body>
+
 </html>
