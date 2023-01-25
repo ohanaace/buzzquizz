@@ -123,7 +123,7 @@ function criarQuizzInfo() { // executada o clicar em "Prosseguir pra criar pergu
     }
     console.log(titulo);
 } 
-function erro(){
+function erro(){//pode ter argumentos, erro('codigo do erro: 42') ou erro(42, 25)
     let errorTree='';
     let prevCaller=erro.caller;
     while(prevCaller!==null){
