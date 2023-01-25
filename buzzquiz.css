@@ -79,12 +79,20 @@ main>section {
     border-radius: 50px;
 }
 
-main>section>span {
+main>section>div>span {
     font-size: 20px;
     font-weight: 700;
 }
+section > div:first-of-type{
+    display: flex;
+    justify-content: space-between;
+}
+section > div > ion-icon{
+    color: #EC362D;
+    font-size: 30px;
+}
 
-main>section>div {
+.container-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

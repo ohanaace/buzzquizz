@@ -22,8 +22,11 @@
             <button onclick="abrirCriarQuizzInfo()">Criar Quizz</button>
         </section>
         <section class="seu-quizzes">
-            <span>Seus Quizzes</span>
             <div>
+                <span>Seus Quizzes</span>
+                <ion-icon onclick="abrirCriarQuizzInfo()" name="add-circle"></ion-icon>
+            </div>
+            <div class="container-cards">
                 <div class="cards">
                     <span>Quizz sobre algo muitissimo interessante imperdivel</span>
                 </div>
@@ -51,8 +54,10 @@
             </div>
         </section>
         <section class="outros-quizzes">
-            <span>Todos os Quizzes</span>
             <div>
+                <span>Todos os Quizzes</span>
+            </div>
+            <div class="container-cards">
                 <div class="cards">
                     <span>Quizz sobre algo muitissimo interessante imperdivel</span>
                 </div>
@@ -146,6 +151,8 @@
         </div>
         <button onclick="criarQuizzInfo()">Prosseguir pra criar perguntas</button>
     </div> <!-- final tela 3.1 informações básicas do quizz -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="buzzquiz.js"></script>
 </body>
