@@ -3,11 +3,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BuzzQuizz</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="buzzquiz.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container"> <!--tela 2 - tela de um quiz-->
+        <header>
+            <h1 class="titulo-buzzquiz"> BuzzQuizz</h1> 
+        </header>
+        <div class="banner">
+           <p class="titulo-quiz">O quão Potterhead você é?</p>
+        </div>
+        <div class="quiz">
+            <div class="pergunta">
+                <div class="caixa-de-pergunta">
+                    <p class="minha-pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
+                </div>
+                <div class="caixa-de-resposta">
+                    <div class="resposta">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <p class="minha-resposta"> Gatinho</p>
+                    </div>
+                    <div class="resposta">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <p class="minha-resposta errada"> Gatinho</p>
+                    </div>
+                    <div class="resposta nao-marcada">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <p class="minha-resposta"> Gatinho</p>
+                    </div>
+                    <div class="resposta">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <p class="minha-resposta correta"> Gatinho</p>
+                    </div>
+                </div>
+                <div class="resultado">
+                    <div class="caixa-de-resultado">
+                        <p class="minha-pergunta">88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+                    </div>
+                    <div class="meu-resultado">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <div class="resultado-final">
+                            <p class="descricao-resultado"> Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="opcoes">
+                    <button class="reiniciar">Reiniciar Quiz</button>
+                    <button class="voltar"> Voltar para home</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div> <!--fim da classe container-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="buzzquiz.js"></script>
 </body>
