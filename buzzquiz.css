@@ -31,9 +31,10 @@ main{
     overflow-y: scroll;
 }
 main > section{
-    width: 82%;
+    width: 80%;
     min-width: 350px;
     margin: 20px 0;
+    max-width: 1050px;
 }
 .criar-quiz{
     min-height: 180px;
@@ -70,7 +71,7 @@ main > section > span{
 
 main > section > div{
     display: flex;
-    justify-content: space-between;
+
     flex-wrap: wrap;
 }
 .cards{
@@ -78,7 +79,7 @@ main > section > div{
     background-size: contain;
     width: 340px;
     height: 180px;
-    margin: 15px 0 0 0;
+    margin: 15px 5px 0 5px;
     border-radius: 5px;
     position: relative;
 }
