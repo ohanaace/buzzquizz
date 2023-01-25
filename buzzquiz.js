@@ -144,4 +144,34 @@ function enviarQuizz(){
     });
     promess.catch(resp=>erro(resp.response.status));
 }
-erro()
+
+function scrollUp(){
+    window.scrollTo(0, 0);
+}
+function reiniciaQuizz(){
+    scrollUp();
+    const respostasAnteriores = document.querySelectorAll('.resposta');
+   console.log(respostasAnteriores);
+
+for(let i = 0; i < respostasAnteriores.length; i++){
+    if(respostasAnteriores[i].classList.contains('nao-marcada')){
+        respostasAnteriores[i].classList.remove('nao-marcada');
+        }
+    if(respostasAnteriores[i].children[1].classList.contains('correta')){
+        respostasAnteriores[i].children[1].classList.remove('correta');
+        }
+    if(respostasAnteriores[i].children[1].classList.contains('errada')){
+        respostasAnteriores[i].children[1].classList.remove('errada');
+        }
+    }
+
+    const caixaDeResultado = document.querySelector('.resultado');
+    caixaDeResultado.classList.add('escondido')
+}
+function voltaParaHome(){
+    const quizzPage = document.querySelector('.container');
+    quizzPage.classList.add('escondido');
+
+    const homePage = document.querySelector('main');
+    homePage.classList.remove('escondido');
+}
