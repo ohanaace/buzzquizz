@@ -22,6 +22,18 @@ header {
     top: 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 69px;
+}
+.escondido {
+    display: none;
+}
+
 
 main {
     display: flex;
@@ -192,6 +204,128 @@ main>section>div {
     color: #FFF5F4;
 }
 
+}
+.banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 227px;
+    background-image: url('https://www.themarysue.com/wp-content/uploads/2018/11/harry-potter-hogwarts.jpg?resize=1200%2C729');
+    background: linear-gradient(0 deg, rgba(0, 0, 0, 0.6)), rgba(0, 0, 0, 0.6);
+    
+}
+.titulo-quiz{
+    font-weight: 400;
+    font-size: 39px;
+    color: #ffffff;
+}
+.pergunta{
+    width: 800px;
+    height: 676px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 42px;
+}
+.caixa-de-pergunta,
+.caixa-de-resultado{
+    background-color: blue;
+    width: 100%;
+    height: 137px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.minha-pergunta{
+    font-weight: 700;
+    font-size: 23px;
+    color: #ffffff;   
+}
+.caixa-de-resposta{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.resposta, .meu-resultado{
+    width: 40%;
+    margin: 20px;
+}
+.resposta:hover{
+    cursor: pointer;
+}
+img{
+    width: 100%;
+    margin-bottom: 7px;
+}
+.nao-marcada{
+    opacity: 30%;
+}
+.nao-marcada:hover{
+    cursor: default;
+}
+.minha-resposta{
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+}
+.correta{
+    color: #009C22;
+}
+.errada{
+    color: #FF4B4B;
+}
+.resultado{
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.05);
+}
+.meu-resultado{
+    width: 100%;
+    display: flex;
+}
+.meu-resultado img{
+    width: 60%;
+    margin-right: 15px;
+}
+.descricao-resultado{
+    font-weight: 700;
+    font-size: 19px;
+    color: #484848;
+}
+.resultado-final{
+    width: 100%;
+}
+.opcoes{
+    margin-top: 57px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+.reiniciar{
+    width: 260px;
+    height: 52px;
+    background-color: #ec362d;
+    border-radius: 15px;
+    border-style: none;
+    font-weight: 400;
+    font-size: 21px;
+    color: #fff5f4;
+}
+.voltar{
+    background-color: #ffffff;
+    width: 220px;
+    height: 44px;
+    font-weight: 400;
+    font-size: 21px;
+    color: #818181;
+    border: none;
+    margin-top: 15px;
+}
+button:hover{
+    cursor: pointer;
+}
+
 @media (max-width: 375px) {
 
     .info,
@@ -216,6 +350,38 @@ main>section>div {
     }
 }
 
-.escondido {
-    display: none;
+@media(max-width: 1100px){
+    .quiz,
+    .pergunta,
+    .resultado,
+    .banner{
+        width: 100%;
+        align-items: center;
+    }
+    .banner{
+        height: 142px;
+    }
+    .titulo-quiz{
+        font-size: 19px;
+    }
+    .pergunta{
+        height: 436px;
+    }
+    .minha-pergunta{
+        font-size: 19px;
+    }
+    .minha-resposta{
+        font-size: 13px;
+    }
+    .meu-resultado{
+        flex-direction: column;
+        align-items: center;
+   
+    }
+    .meu-resultado img{
+        height: 255px;
+    }
+    .descricao-resultado{
+        font-size: 17px;
+    }
 }
