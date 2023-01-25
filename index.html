@@ -19,7 +19,7 @@
     <main>
         <section class="criar-quiz">
             <span>Você não criou nenhum quizz ainda :(</span>
-            <button onclick="criarQuizzInfo()">Criar Quizz</button>
+            <button onclick="abrirCriarQuizzInfo()">Criar Quizz</button>
         </section>
         <section class="seu-quizzes">
             <span>Seus Quizzes</span>
@@ -76,10 +76,10 @@
     </main>
     <div class="container escondido"> <!--tela 2 - tela de um quiz-->
         <header>
-            <h1 class="titulo-buzzquiz"> BuzzQuizz</h1> 
+            <h1 class="titulo-buzzquiz"> BuzzQuizz</h1>
         </header>
         <div class="banner">
-           <p class="titulo-quiz">O quão Potterhead você é?</p>
+            <p class="titulo-quiz">O quão Potterhead você é?</p>
         </div>
         <div class="quiz">
             <div class="pergunta">
@@ -88,19 +88,23 @@
                 </div>
                 <div class="caixa-de-resposta">
                     <div class="resposta">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
                         <p class="minha-resposta"> Gatinho</p>
                     </div>
                     <div class="resposta">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
                         <p class="minha-resposta errada"> Gatinho</p>
                     </div>
                     <div class="resposta nao-marcada">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
                         <p class="minha-resposta"> Gatinho</p>
                     </div>
                     <div class="resposta">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
                         <p class="minha-resposta correta"> Gatinho</p>
                     </div>
                 </div>
@@ -109,9 +113,12 @@
                         <p class="minha-pergunta">88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
                     </div>
                     <div class="meu-resultado">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg" alt="" />
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
                         <div class="resultado-final">
-                            <p class="descricao-resultado"> Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                            <p class="descricao-resultado"> Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
+                                infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este
+                                teste.</p>
                         </div>
                     </div>
                 </div>
@@ -131,10 +138,10 @@
         <div>
             <input type="text" placeholder="Título do seu quizz">
             <input type="text" placeholder="URL da imagem do seu quizz">
-            <input type="text" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" placeholder="Quantidade de níveis do quizz">
+            <input type="number" placeholder="Quantidade de perguntas do quizz">
+            <input type="number" placeholder="Quantidade de níveis do quizz">
         </div>
-        <button onclick="alert('em breve')">Prosseguir pra criar perguntas</button>
+        <button onclick="criarQuizzInfo()">Prosseguir pra criar perguntas</button>
     </div> <!-- final tela 3.1 informações básicas do quizz -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="buzzquiz.js"></script>
