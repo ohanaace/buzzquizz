@@ -297,8 +297,6 @@ function scrollUp() {
 function reiniciaQuizz() {
     scrollUp();
     const respostasAnteriores = document.querySelectorAll('.resposta');
-    console.log(respostasAnteriores);
-
     for (let i = 0; i < respostasAnteriores.length; i++) {
         if (respostasAnteriores[i].classList.contains('nao-marcada')) {
             respostasAnteriores[i].classList.remove('nao-marcada');
@@ -320,6 +318,19 @@ function voltaParaHome() {
 
     const homePage = document.querySelector('main');
     homePage.classList.remove('escondido');
+}
+
+function respostaEscolhida(meuPalpite){
+    const respostasPossiveis = document.querySelector('.caixa-de-resposta').children;
+    console.log(meuPalpite);
+    console.log(respostasPossiveis);
+    for(let i = 0; i < respostasPossiveis.length; i++){
+        const elementoAnalisado = respostasPossiveis[i];
+        elementoAnalisado.classList.add('nao-marcada');
+        if(elementoAnalisado.innerHTML === meuPalpite.innerHTML){
+            elementoAnalisado.classList.remove('nao-marcada');
+        }
+    }
 }
 
 function renderizarQuizzes(quizzes) {

@@ -16,7 +16,7 @@
 
 <body>
     <header>BuzzQuiz</header>
-    <main>
+    <main class="escondido">
         <section class="criar-quiz">
             <span>Você não criou nenhum quizz ainda :(</span>
             <button onclick="abrirCriarQuizzInfo()">Criar Quizz</button>
@@ -28,7 +28,6 @@
             </div>
             <div class="container-cards">
                 <div class="cards">
-                    <img src="img/1295304.jpg" alt="">
                     <span>Quizz sobre algo muitissimo interessante imperdivel</span>
                 </div>
                 <div class="cards">
@@ -83,7 +82,7 @@
             </div>
         </section>
     </main>
-    <div class="container escondido"> <!--tela 2 - tela de um quiz-->
+    <div class="container"> <!--tela 2 - tela de um quiz-->
         <header>
             <h1 class="titulo-buzzquiz"> BuzzQuizz</h1>
         </header>
@@ -96,51 +95,77 @@
                     <p class="minha-pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
                 </div>
                 <div class="caixa-de-resposta">
-                    <div class="resposta">
+                    <div class="resposta" onclick="respostaEscolhida(this)">
                         <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
                             alt="" />
                         <p class="minha-resposta"> Gatinho</p>
                     </div>
-                    <div class="resposta">
+                    <div class="resposta" onclick="respostaEscolhida(this)">
                         <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
                             alt="" />
-                        <p class="minha-resposta errada"> Gatinho</p>
+                        <p class="minha-resposta"> Gatoso</p>
                     </div>
-                    <div class="resposta nao-marcada">
+                    <div class="resposta" onclick="respostaEscolhida(this)">
                         <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
                             alt="" />
-                        <p class="minha-resposta"> Gatinho</p>
+                        <p class="minha-resposta"> Gatineo</p>
                     </div>
-                    <div class="resposta">
+                    <div class="resposta" onclick="respostaEscolhida(this)">
                         <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
                             alt="" />
-                        <p class="minha-resposta correta"> Gatinho</p>
+                        <p class="minha-resposta"> Gato</p>
                     </div>
-                </div>
-                <div class="resultado">
-                    <div class="caixa-de-resultado">
-                        <p class="minha-pergunta">88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
-                    </div>
-                    <div class="meu-resultado">
-                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
-                            alt="" />
-                        <div class="resultado-final">
-                            <p class="descricao-resultado"> Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
-                                infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este
-                                teste.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="opcoes">
-                    <button class="reiniciar">Reiniciar Quiz</button>
-                    <button class="voltar"> Voltar para home</button>
                 </div>
             </div>
-
+            <div class="pergunta">
+                <div class="caixa-de-pergunta">
+                    <p class="minha-pergunta">Em qual animal Alastor Olho-Tonto Moody transfigurou Malfoy?</p>
+                </div>
+                <div class="caixa-de-resposta">
+                    <div class="resposta" onclick="respostaEscolhida(this)">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
+                        <p class="minha-resposta"> Gatenho</p>
+                    </div>
+                    <div class="resposta" onclick="respostaEscolhida(this)">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
+                        <p class="minha-resposta"> Gotoso</p>
+                    </div>
+                    <div class="resposta" onclick="respostaEscolhida(this)">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
+                        <p class="minha-resposta"> Miau</p>
+                    </div>
+                    <div class="resposta" onclick="respostaEscolhida(this)">
+                        <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                            alt="" />
+                        <p class="minha-resposta"> Cato</p>
+                    </div>
+                </div>
+            </div>
+            
+        <div class="resultado">
+            <div class="caixa-de-resultado">
+                <p class="minha-pergunta">88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+            </div>
+            <div class="meu-resultado">
+                <img src="https://static1.patasdacasa.com.br/articles/9/37/49/@/15168-o-gato-munchkin-e-docil-afetuoso-e-expl-articles_media_mobile-2.jpg"
+                    alt="" />
+                <div class="resultado-final">
+                    <p class="descricao-resultado"> Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
+                        infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este
+                        teste.</p>
+                </div>
+            </div>
         </div>
-
+        <div class="opcoes">
+            <button class="reiniciar" onclick="reiniciaQuizz()">Reiniciar Quiz</button>
+            <button class="voltar" onclick="voltaParaHome()"> Voltar para home</button>
+        </div>
+    </div>
     </div> <!--fim da classe container com a tela 2-->
-    <div class="criação-info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
+    <div class="info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
         <div>
             Comece pelo começo
         </div>
@@ -152,7 +177,6 @@
         </div>
         <button onclick="criarQuizzInfo()">Prosseguir pra criar perguntas</button>
     </div> <!-- final tela 3.1 informações básicas do quizz -->
-    <div class="criação-perguntas escondido"></div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
