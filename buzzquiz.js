@@ -175,3 +175,51 @@ function voltaParaHome(){
     const homePage = document.querySelector('main');
     homePage.classList.remove('escondido');
 }
+
+function renderizarQuizzes(quizzes){
+    const elementSeusQuizzes=document.querySelector('.seu-quizzes .container-cards');
+    const elementOutrosQuizzes=document.querySelector('.outros-quizzes .container-cards');
+    elementSeusQuizzes.innerHTML='';
+    elementOutrosQuizzes.innerHTML='';
+    // debugger;
+    elementSeusQuizzes.parentNode.classList.add('escondido');
+    elementOutrosQuizzes.parentNode.classList.add('escondido');
+    console.log(quizzes);
+    for(let i=0;i<quizzes.length;i++){
+        let jaAdicionado=false;
+        for(let j=0;j<idQuizzes.length;j++){
+            if(quizzes[i].id===idQuizzes[j]){
+                elementSeusQuizzes+=`
+                <div class="cards">
+                    <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
+                    <span>${quizzes[i].title}</span>
+                </div>
+                `;
+                jaAdicionado=true;
+                elementSeusQuizzes.parentNode.classList.remove('escondido');
+                document.querySelector('.criar-quiz').classList.add('escondido');
+                break;
+            }
+        }
+        if(jaAdicionado===false){
+            elementOutrosQuizzes.innerHTML+=`
+            <div class="cards">
+            <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
+            <span>${quizzes[i].title}</span>
+            </div>
+            `;
+            elementOutrosQuizzes.parentNode.classList.remove('escondido');
+        }
+    }
+}
+
+function pegarQuizzes(){
+    const promess=axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+    promess.then(resp=>renderizarQuizzes(resp.data));
+    promess.catch(resp=>{
+        console.log('Erro ao pegar quizzes');
+        console.log(resp.response.status)
+    });
+}
+
+pegarQuizzes()
