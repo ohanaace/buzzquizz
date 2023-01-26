@@ -123,16 +123,18 @@ function criarQuizzInfo() { // executada o clicar em "Prosseguir pra criar pergu
     }
     console.log(titulo);
 } 
-function erro(){
-    let errorTree='';
-    let prevCaller=erro.caller;
-    while(prevCaller!==null){
-        errorTree+=` <= ${prevCaller.name}`;
-        prevCaller=prevCaller.caller;
-    }
-    console.log(`Erro\nCaller: ${errorTree}`);
-    console.log(Object.values(arguments));
-}
+
+//                            ------Bugada------
+// function erro(){//pode ter argumentos, erro('codigo do erro: 42') ou erro(42, 25)
+//     let errorTree='';
+//     let prevCaller=erro.caller;
+//     while(prevCaller!==null){
+//         errorTree+=` <= ${prevCaller.name}`;
+//         prevCaller=prevCaller.caller;
+//     }
+//     console.log(`Erro\nCaller: ${errorTree}`);
+//     console.log(Object.values(arguments));
+// }
 
 function enviarQuizz(){
     const promess=axios.post(url,novoQuizz);
@@ -142,7 +144,7 @@ function enviarQuizz(){
         if(tempIdQuizzes!==null) idQuizzes=tempIdQuizzes;
         idQuizzes.push(resp.data);
     });
-    promess.catch(resp=>erro(resp.response.status));
+    promess.catch(resp=>console.log(resp.response.status));
 }
 
 function scrollUp(){
@@ -181,7 +183,6 @@ function renderizarQuizzes(quizzes){
     const elementOutrosQuizzes=document.querySelector('.outros-quizzes .container-cards');
     elementSeusQuizzes.innerHTML='';
     elementOutrosQuizzes.innerHTML='';
-    // debugger;
     elementSeusQuizzes.parentNode.classList.add('escondido');
     elementOutrosQuizzes.parentNode.classList.add('escondido');
     console.log(quizzes);
