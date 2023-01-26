@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -116,9 +115,10 @@ main>section>div {
 
 /* inicio tela 3 */
 
+/*  inicio comum tela 3.1 e 3.2 */
 
-
-.info {
+.criação-info,
+.criação-perguntas {
     /* tela de informações básicas do quizz */
     width: 100%;
     margin-left: auto;
@@ -130,8 +130,8 @@ main>section>div {
     align-items: center;
 }
 
-
-.info>:nth-child(1) {
+.criação-info>:nth-child(1),
+.criação-perguntas>:nth-child(1) {
     /* titulo da etapa de criação do quizz */
     width: 224px;
     height: 27px;
@@ -147,7 +147,56 @@ main>section>div {
     color: #000000;
 }
 
-.info>:nth-child(2) {
+.criação-info button,
+.criação-perguntas button {
+    /* botão para proxima etapa */
+    width: 368.86px;
+    height: 54px;
+
+    background: #EC362D;
+    border-radius: 15px;
+
+    font-weight: 400;
+    font-size: 21px;
+
+    color: #FFF5F4;
+}
+
+.criação-perguntas input,
+.criação-info input {
+    /* inputs */
+
+    width: 564px;
+    height: 46px;
+    margin-bottom: 9px;
+    padding-left: 23px;
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.criação-info input,
+.criação-info input::placeholder,
+.criação-perguntas input,
+.criação-perguntas input::placeholder {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+}
+
+.criação-info input::placeholder,
+.criação-perguntas input::placeholder {
+    font-style: italic;
+
+    color: #BABABA;
+}
+
+/*  final comum tela 3.1 e 3.2 */
+
+/* inicio tela 3.1 */
+
+.criação-info>:nth-child(2) {
     /* div com 4 inputs */
     width: 600px;
     height: 256px;
@@ -162,45 +211,66 @@ main>section>div {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
-.info input {
-    /* inputs da div acima */
+/* final tela 3.1 */
 
-    width: 564px;
-    height: 46px;
-    margin-bottom: 9px;
-    padding-left: 23px;
+/* inicio tela 3.2 */
+
+.perguntas-respostas span {
+    margin-top: 14px;
+    margin-bottom: 12px;
+}
+
+.criação-perguntas input {
+    margin-bottom: 12px;
+}
+
+.perguntas-respostas {
+    width: 601px;
+    margin-bottom: 22px;
+    padding-top: 14px;
+    padding-bottom: 24px;
+    padding-left: 17px;
+    padding-right: 20px;
 
     background: #FFFFFF;
-    border: 1px solid #D1D1D1;
-    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    flex-direction: column;
+
+    color: #000000;
 }
 
-.info input,
-.info input::placeholder {
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 22px;
+.perguntas-respostas>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.info input::placeholder {
-    font-style: italic;
-
-    color: #BABABA;
+ion-icon {
+    height: 23px;
+    width: 26px;
 }
 
-.info button {
-    /* botão para proxima etapa */
-    width: 368.86px;
-    height: 54px;
-
-    background: #EC362D;
-    border-radius: 15px;
-
-    font-weight: 400;
-    font-size: 21px;
-
-    color: #FFF5F4;
+.criação-perguntas button {
+    margin-top: 59px;
+    margin-bottom: 59px;
 }
+
+.perguntas-respostas :nth-child(10),
+.perguntas-respostas :nth-child(12) {
+    margin-top: 32px;
+}
+
+/* final tela 3.2
+
+/* final tela 3 */
 
 .banner {
     display: flex;
@@ -352,22 +422,32 @@ button:hover {
 
 @media (max-width: 375px) {
 
-    .info,
-    .info>div,
-    .info>:nth-child(2) {
+    .criação-info,
+    .criação-info>div,
+    .criação-info>:nth-child(2),
+    .criação-perguntas,
+    .criação-perguntas>div,
+    .criação-perguntas>:nth-child(2) {
         width: 100%;
     }
 
-    .info input {
+    .criação-info input,
+    .criação-perguntas input {
         width: 91%;
         padding-left: 14px;
     }
 
-    .info button {
+    .criação-perguntas input {
+        width: 100%;
+    }
+
+    .criação-info button,
+    .criação-perguntas button {
         width: 86.5%;
     }
 
-    .info>:nth-child(1) {
+    .criação-info>:nth-child(1),
+    .criação-perguntas>:nth-child(1) {
         font-size: 20;
         line-height: 23;
         justify-content: center;

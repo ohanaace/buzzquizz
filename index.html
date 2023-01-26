@@ -123,15 +123,15 @@
                     </div>
                 </div>
                 <div class="opcoes">
-                    <button class="reiniciar" onclick="reiniciaQuizz()">Reiniciar Quiz</button>
-                    <button class="voltar" onclick="voltaParaHome()"> Voltar para home</button>
+                    <button class="reiniciar">Reiniciar Quiz</button>
+                    <button class="voltar"> Voltar para home</button>
                 </div>
             </div>
 
         </div>
 
     </div> <!--fim da classe container com a tela 2-->
-    <div class="info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
+    <div class="criação-info escondido"> <!-- início tela 3.1 informações básicas do quizz -->
         <div>
             Comece pelo começo
         </div>
@@ -143,7 +143,10 @@
         </div>
         <button onclick="criarQuizzInfo()">Prosseguir pra criar perguntas</button>
     </div> <!-- final tela 3.1 informações básicas do quizz -->
+    <div class="criação-perguntas escondido"></div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="buzzquiz.js"></script>
 </body>
 
