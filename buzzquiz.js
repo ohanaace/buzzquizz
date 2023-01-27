@@ -1,5 +1,6 @@
 const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes';
-let idQuizzes = [];
+let idSeusQuizzes = [];
+let todosQuizzes=[];
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -441,8 +442,8 @@ function enviarQuizz() {
     promess.then(resp => {
         console.log('envio bem sucedido');
         const tempIdQuizzes = localStorage.getItem('idQuizzes');
-        if (tempIdQuizzes !== null) idQuizzes = tempIdQuizzes;
-        idQuizzes.push(resp.data);
+        if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
+        idSeusQuizzes.push(resp.data);
     });
     promess.catch(resp => console.log(resp.response.status));
 }
@@ -501,20 +502,37 @@ function respostaEscolhida(meuPalpite) {
 //function embaralhaRespostas(){
   //  return Math.random() - 0.5;
 //}
+
+
+function entrarNoQuizz(quizzIndex){
+    const quizzSelecionado=todosQuizzes[quizzIndex];
+    console.log(quizzSelecionado);
+    document.querySelector('main').classList.add('escondido');
+    let elemento=document.querySelector('#tela2');
+    elemento.classList.remove('escondido');
+    elemento.querySelector('.titulo-quiz').innerHTML=quizzSelecionado.title;
+    elemento=elemento.querySelector('.pergunta');
+}
+
+
+
+
+
 function renderizarQuizzes(quizzes) {
+    console.log(quizzes);
+    todosQuizzes=quizzes;
     const elementSeusQuizzes = document.querySelector('.seu-quizzes .container-cards');
     const elementOutrosQuizzes = document.querySelector('.outros-quizzes .container-cards');
     elementSeusQuizzes.innerHTML = '';
     elementOutrosQuizzes.innerHTML = '';
     elementSeusQuizzes.parentNode.classList.add('escondido');
     elementOutrosQuizzes.parentNode.classList.add('escondido');
-    console.log(quizzes);
     for (let i = 0; i < quizzes.length; i++) {
         let jaAdicionado = false;
-        for (let j = 0; j < idQuizzes.length; j++) {
-            if (quizzes[i].id === idQuizzes[j]) {
+        for (let j = 0; j < idSeusQuizzes.length; j++) {
+            if (quizzes[i].id === idSeusQuizzes[j]) {
                 elementSeusQuizzes += `
-                <div class="cards">
+                <div onclick="entrarNoQuizz(${i})" class="cards">
                     <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
                     <span>${quizzes[i].title}</span>
                 </div>
@@ -527,7 +545,7 @@ function renderizarQuizzes(quizzes) {
         }
         if (jaAdicionado === false) {
             elementOutrosQuizzes.innerHTML += `
-            <div class="cards">
+            <div onclick="entrarNoQuizz(${i})" class="cards">
             <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
             <span>${quizzes[i].title}</span>
             </div>
@@ -547,8 +565,4 @@ function pegarQuizzes() {
 }
 
 pegarQuizzes()
-
-
-
-
 
