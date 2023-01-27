@@ -477,7 +477,10 @@ function voltaParaHome() {
 }
 
 function respostaEscolhida(meuPalpite) {
-    const respostasPossiveis = document.querySelector('.caixa-de-resposta').children;
+    if(meuPalpite.classList.contains('nao-marcada') || meuPalpite.classList.contains('marcada')){
+        return;
+    }
+    const respostasPossiveis = meuPalpite.parentNode.children;
     console.log(meuPalpite);
     console.log(respostasPossiveis);
     for (let i = 0; i < respostasPossiveis.length; i++) {
@@ -485,10 +488,16 @@ function respostaEscolhida(meuPalpite) {
         elementoAnalisado.classList.add('nao-marcada');
         if (elementoAnalisado.innerHTML === meuPalpite.innerHTML) {
             elementoAnalisado.classList.remove('nao-marcada');
+            elementoAnalisado.classList.add('marcada');
         }
     }
 }
+//criado para embaralhar as respostas - Suelen
 
+//const respostasEmbaralhadas = document.querySelectorAll('.minha-resposta').sort(embaralhaRespostas);
+//function embaralhaRespostas(){
+  //  return Math.random() - 0.5;
+//}
 function renderizarQuizzes(quizzes) {
     const elementSeusQuizzes = document.querySelector('.seu-quizzes .container-cards');
     const elementOutrosQuizzes = document.querySelector('.outros-quizzes .container-cards');
