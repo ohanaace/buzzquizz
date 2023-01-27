@@ -457,6 +457,9 @@ function reiniciaQuizz() {
         if (respostasAnteriores[i].classList.contains('nao-marcada')) {
             respostasAnteriores[i].classList.remove('nao-marcada');
         }
+        if (respostasAnteriores[i].classList.contains('marcada')) {
+            respostasAnteriores[i].classList.remove('marcada');
+        }
         if (respostasAnteriores[i].children[1].classList.contains('correta')) {
             respostasAnteriores[i].children[1].classList.remove('correta');
         }
