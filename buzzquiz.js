@@ -160,6 +160,8 @@ function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente
     const quantidadePerguntas = inputs[2].value;
     const quantidadeNiveis = inputs[3].value;
 
+    novoQuizz.title = titulo; // API
+    novoQuizz.image = imagemUrl; // API
 
     const tituloValido = titulo.length >= 20 && titulo.length <= 65; // titulo deve conter entre 20 e 65 caracteres
     const imagemUrlValida = urlEhValida(imagemUrl); // url deve ser valida
@@ -184,7 +186,7 @@ function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente
 
     if (preenchidoCorretamente) {
         abrirCriarQuizzPerguntas(quantidadePerguntas);
-        construirQuizzNiveis(quantidadeNiveis); // agora
+        construirQuizzNiveis(quantidadeNiveis);
     }
 }
 
@@ -248,6 +250,8 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
 
     let perguntasPreenchidasCorretamente = true; // poderá receber false ao falhar com algum requisito
 
+    novoQuizz.questions = []; // zera o array de questions da API
+
 
     for (let i = 0; i < divs.length; i++) { // percorre todas as divs de criação de perguntas
 
@@ -273,6 +277,47 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
         const respostaIncorreta3 = selecionaChild(perguntaDiv, 12).value;
         const urlDaImagem3 = selecionaChild(perguntaDiv, 13).value;
 
+
+        const respostas = [ // cria array de respostas que fica dentro de cada pergunta da API, considerando que todas foram preenchidas
+            {
+                text: respostaCorreta,
+                image: urlDaImagem,
+                isCorrectAnswer: true
+            },
+            {
+                text: respostaIncorreta1,
+                image: urlDaImagem1,
+                isCorrectAnswer: false
+            },
+            {
+                text: respostaIncorreta2,
+                image: urlDaImagem2,
+                isCorrectAnswer: false
+            },
+            {
+                text: respostaIncorreta3,
+                image: urlDaImagem3,
+                isCorrectAnswer: false
+            }
+        ]
+
+        for (let j = 1; j <= respostas.length - 1;) { // caso alguma resposta esteja vazia é removido do array de respostas 
+            if (respostas[j].text === "") {
+                respostas.splice(j, 1);
+            } else {
+                j++;
+            }
+        }
+
+        const pergunta = { // cria cria pergunta completa no formato da API
+            title: textoDaPergunta,
+            color: codigoCor,
+            answers: respostas
+        }
+
+        novoQuizz.questions.push(pergunta); // adiciona ao array da API
+
+
         const textoDaPerguntaValido = textoDaPergunta.length >= 20; // contem no minimo 20 caracteres
         const CorDeFundoDaPerguntaValida = corValida(codigoCor);
         const respostaCorretaValida = respostaCorreta !== ""; // não pode estar vazia
@@ -292,7 +337,8 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
     }
 
     if (perguntasPreenchidasCorretamente) {
-        abrirCriarQuizzNiveis(); // agora
+        abrirCriarQuizzNiveis();
+        console.log(novoQuizz); // deixei para testes
     }
 }
 
@@ -320,6 +366,8 @@ function abrirInputNiveis(ionIcon) { // abre a div exivindo inputs, ocorre na te
 
 function finalizarQuizz(button) { // verifica se inputs foram preenchidos corretamente, se sim deverá ir para tela de sucesso - Pedro
 
+    novoQuizz.levels = []; // zera niveis da API
+
     const divPai = button.parentNode; // div que contem titulo, niveis para criar e botão
     const divs = divPai.querySelectorAll(".nives-acertos"); //  array com divs de criação de niveis
 
@@ -339,9 +387,18 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
         }
 
         const tituloDoNivel = selecionaChild(nivelDiv, 2).value;
-        const acertoMinimo = selecionaChild(nivelDiv, 3).value;
+        const acertoMinimo = +selecionaChild(nivelDiv, 3).value;
         const urlDaImagem = selecionaChild(nivelDiv, 4).value;
         const descriçãoDoNivel = selecionaChild(nivelDiv, 5).value;
+
+        const levelApi = { // cria nivel no formato da API
+            title: tituloDoNivel,
+            image: urlDaImagem,
+            text: descriçãoDoNivel,
+            minValue: acertoMinimo
+        }
+
+        novoQuizz.levels.push(levelApi); // adiciona no array de niveis da API
 
         if (acertoMinimo === 0) {
             existeAcertoMinimo0 = true;
@@ -363,6 +420,7 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
 
     if (niveisPreenchidosCorretamente && existeAcertoMinimo0) {
         alert("em breve tela de quizz pronto");
+        console.log(novoQuizz); // para testes
     } else (alert("no minimo um nivel deve conter acerto mínimo igual a 0"));
 }
 
@@ -418,14 +476,14 @@ function voltaParaHome() {
     homePage.classList.remove('escondido');
 }
 
-function respostaEscolhida(meuPalpite){
+function respostaEscolhida(meuPalpite) {
     const respostasPossiveis = document.querySelector('.caixa-de-resposta').children;
     console.log(meuPalpite);
     console.log(respostasPossiveis);
-    for(let i = 0; i < respostasPossiveis.length; i++){
+    for (let i = 0; i < respostasPossiveis.length; i++) {
         const elementoAnalisado = respostasPossiveis[i];
         elementoAnalisado.classList.add('nao-marcada');
-        if(elementoAnalisado.innerHTML === meuPalpite.innerHTML){
+        if (elementoAnalisado.innerHTML === meuPalpite.innerHTML) {
             elementoAnalisado.classList.remove('nao-marcada');
         }
     }
