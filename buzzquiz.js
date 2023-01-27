@@ -124,6 +124,33 @@ function abrirCriarQuizzInfo() { // fecha tela 1 abre tela 3.1 - Pedro
     abrirFechartela(main, info);
 }
 
+function construirQuizzNiveis(quantidaDeNiveis) { // cria tela de criação de níveis - Pedro
+
+    const niveis = document.querySelector(".criação-niveis");
+
+
+    let divsNiveis = "";
+
+    for (let i = 1; i <= quantidaDeNiveis; i++) { // executa quantidaDeNiveis vezes, para cada execução adiciona uma div para criar um nivel
+        divsNiveis += `
+        <div class="nives-acertos">
+            <div>
+                <span>Nível ${i}</span>
+                <ion-icon onclick="abrirInputNiveis(this)" name="create-outline"></ion-icon>
+            </div>
+        </div>
+        `
+    }
+
+    niveis.innerHTML = ` 
+        <div>
+            Agora, decida os níveis!
+        </div>
+        ${divsNiveis}
+        <button onclick="finalizarQuizz(this)">Finalizar Quizz</button>
+    ` // todo o conteudo que será exibido
+}
+
 function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente, se sim executa a próxima função - Pedro
 
     let inputs = document.querySelectorAll(".criação-info input"); // array com inputs de criação de perguntas (info)
@@ -157,6 +184,7 @@ function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente
 
     if (preenchidoCorretamente) {
         abrirCriarQuizzPerguntas(quantidadePerguntas);
+        construirQuizzNiveis(quantidadeNiveis); // agora
     }
 }
 
@@ -264,8 +292,78 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
     }
 
     if (perguntasPreenchidasCorretamente) {
-        alert("em breve criação de niveis");
+        abrirCriarQuizzNiveis(); // agora
     }
+}
+
+function abrirCriarQuizzNiveis() { // fecha tela 3.2 abre tela 3.3 - Pedro
+
+    const niveis = document.querySelector(".criação-niveis");
+    const perguntas = document.querySelector(".criação-perguntas");
+
+    abrirFechartela(perguntas, niveis);
+}
+
+function abrirInputNiveis(ionIcon) { // abre a div exivindo inputs, ocorre na tela 3.3 - Pedro
+
+    const div = ionIcon.parentNode.parentNode; // div que será alterada
+    const nivel = ionIcon.parentNode.querySelector("span").innerHTML; // nivel "x" irmã do ionIcon clicado
+
+    div.innerHTML = ` 
+        <span>${nivel}</span>
+        <input type="text" placeholder="Título do nível">
+        <input type="number" placeholder="% de acerto mínima">
+        <input type="text" placeholder="URL da imagem do nível">
+        <input type="text" placeholder="Descrição do nível">
+    ` // altera a div exibindo seus inputs
+}
+
+function finalizarQuizz(button) { // verifica se inputs foram preenchidos corretamente, se sim deverá ir para tela de sucesso - Pedro
+
+    const divPai = button.parentNode; // div que contem titulo, niveis para criar e botão
+    const divs = divPai.querySelectorAll(".nives-acertos"); //  array com divs de criação de niveis
+
+    let niveisPreenchidosCorretamente = true; // poderá receber false ao falhar com algum requisito
+    let existeAcertoMinimo0 = false; // recebe true caso algum acerto minimo seja igual a 0
+
+    for (let i = 0; i < divs.length; i++) { // percorre todas as divs de criação de niveis
+
+        const nivelDiv = divs[i];
+
+        const divFoiAberta = nivelDiv.innerHTML.includes("input"); // caso a string "input" esteja no innerHTML da div de criação de nivel, significa que ela foi aberta
+
+        if (!divFoiAberta) {
+            alert(`Se esqueceu do nivel ${i + 1}`);
+            niveisPreenchidosCorretamente = false;
+            break; // como descumpriu um requisito finaliza o loop
+        }
+
+        const tituloDoNivel = selecionaChild(nivelDiv, 2).value;
+        const acertoMinimo = selecionaChild(nivelDiv, 3).value;
+        const urlDaImagem = selecionaChild(nivelDiv, 4).value;
+        const descriçãoDoNivel = selecionaChild(nivelDiv, 5).value;
+
+        if (acertoMinimo === 0) {
+            existeAcertoMinimo0 = true;
+        }
+
+        const tituloDoNivelValido = tituloDoNivel.length >= 10; // contem no minimo 10 caracteres
+        const acertoMinimoValido = acertoMinimo >= 0 && acertoMinimo <= 100; // entre 0 e 100
+        const urlDaImagemValida = urlEhValida(urlDaImagem);
+        const descriçãoDoNivelValida = descriçãoDoNivel.length >= 30 // minimo 30 caracteres
+
+
+        const nivelDivValido = tituloDoNivelValido && acertoMinimoValido && urlDaImagemValida && descriçãoDoNivelValida;
+
+        if (!nivelDivValido) { // se algum requisito foi descumprido
+            alert(`Tem algo de errado na criação de nivel ${i + 1}`);
+            niveisPreenchidosCorretamente = false;
+        }
+    }
+
+    if (niveisPreenchidosCorretamente && existeAcertoMinimo0) {
+        alert("em breve tela de quizz pronto");
+    } else (alert("no minimo um nivel deve conter acerto mínimo igual a 0"));
 }
 
 //                            ------Bugada------

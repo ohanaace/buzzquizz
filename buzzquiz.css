@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -79,44 +80,27 @@ main>section {
     border-radius: 50px;
 }
 
-main>section>div>span {
+main>section>span {
     font-size: 20px;
     font-weight: 700;
 }
-section > div:first-of-type{
-    display: flex;
-    justify-content: space-between;
-}
-section > div > ion-icon{
-    color: #EC362D;
-    font-size: 30px;
-}
 
-.container-cards {
+main>section>div {
     display: flex;
-    justify-content: center;
+
     flex-wrap: wrap;
 }
 
 .cards {
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65%, #000000 100%), url(img/1295304.jpg);
+    background-size: contain;
     width: 340px;
     height: 180px;
     margin: 15px 5px 0 5px;
     border-radius: 5px;
     position: relative;
 }
-.cards::after{
-    content:'';
-    position:absolute;
-    left:0; top:0;
-    width:100%; height:100%;
-    display:inline-block;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,.5) 65%, #000000 100%);
-}
-img{
-    height: 100%;
-    width: 100%;
-}
+
 .cards>span {
     color: white;
     font-size: 19px;
@@ -126,14 +110,15 @@ img{
     bottom: 8px;
     left: 20px;
     margin: auto;
-    z-index: 1;
 }
 
 
 
 /* inicio tela 3 */
 
-/*  inicio comum tela 3.1 e 3.2 */
+/* inicio comum tela 3.1, 3.2 e 3.3 */
+
+.criação-niveis,
 
 .criação-info,
 .criação-perguntas {
@@ -148,10 +133,12 @@ img{
     align-items: center;
 }
 
+.criação-niveis>:nth-child(1),
+
 .criação-info>:nth-child(1),
 .criação-perguntas>:nth-child(1) {
     /* titulo da etapa de criação do quizz */
-    width: 224px;
+    width: auto;
     height: 27px;
     margin-bottom: 27px;
 
@@ -164,6 +151,8 @@ img{
 
     color: #000000;
 }
+
+.criação-niveis button,
 
 .criação-info button,
 .criação-perguntas button {
@@ -180,6 +169,8 @@ img{
     color: #FFF5F4;
 }
 
+.criação-niveis input,
+
 .criação-perguntas input,
 .criação-info input {
     /* inputs */
@@ -194,6 +185,9 @@ img{
     border-radius: 5px;
 }
 
+.criação-niveis input,
+.criação-niveis input::placeholder,
+
 .criação-info input,
 .criação-info input::placeholder,
 .criação-perguntas input,
@@ -203,6 +197,7 @@ img{
     line-height: 22px;
 }
 
+.criação-niveis input::placeholder,
 .criação-info input::placeholder,
 .criação-perguntas input::placeholder {
     font-style: italic;
@@ -231,22 +226,26 @@ img{
 
 /* final tela 3.1 */
 
-/* inicio tela 3.2 */
+/* inicio comum tela 3.2 e 3.3 */
 
+.nives-acertos span,
 .perguntas-respostas span {
-    margin-top: 14px;
-    margin-bottom: 12px;
+    margin-top: 13px;
+    margin-bottom: 13px;
 }
 
+.nives-acertos input,
 .criação-perguntas input {
     margin-bottom: 12px;
 }
 
+.nives-acertos,
 .perguntas-respostas {
     width: 601px;
     margin-bottom: 22px;
     padding-top: 14px;
-    padding-bottom: 24px;
+    padding-bottom: 11px;
+
     padding-left: 17px;
     padding-right: 20px;
 
@@ -264,6 +263,7 @@ img{
     color: #000000;
 }
 
+.nives-acertos>div,
 .perguntas-respostas>div {
     width: 100%;
     display: flex;
@@ -276,17 +276,32 @@ ion-icon {
     width: 26px;
 }
 
+.criação-niveis button,
 .criação-perguntas button {
     margin-top: 59px;
     margin-bottom: 59px;
 }
+
+/* final comum tela 3.2 e 3.3 */
+
+/* começo tela 3.2 */
 
 .perguntas-respostas :nth-child(10),
 .perguntas-respostas :nth-child(12) {
     margin-top: 32px;
 }
 
-/* final tela 3.2
+/* final tela 3.2 */
+
+/* inicio tela 3.3 */
+
+.nives-acertos :nth-child(5) {
+    height: 177px;
+    padding-bottom: 142px;
+    padding-top: 13px;
+}
+
+/* final tela 3.3 */
 
 /* final tela 3 */
 
@@ -440,6 +455,9 @@ button:hover {
 
 @media (max-width: 375px) {
 
+    .criação-niveis,
+    .criação-niveis>div,
+    .criação-niveis>:nth-child(2),
     .criação-info,
     .criação-info>div,
     .criação-info>:nth-child(2),
@@ -449,21 +467,25 @@ button:hover {
         width: 100%;
     }
 
+    .criação-niveis input,
     .criação-info input,
     .criação-perguntas input {
         width: 91%;
         padding-left: 14px;
     }
 
+    .criação-niveis input,
     .criação-perguntas input {
         width: 100%;
     }
 
+    .criação-niveis button,
     .criação-info button,
     .criação-perguntas button {
         width: 86.5%;
     }
 
+    .criação-niveis>:nth-child(1),
     .criação-info>:nth-child(1),
     .criação-perguntas>:nth-child(1) {
         font-size: 20;
