@@ -145,7 +145,7 @@ function construirQuizzNiveis(quantidaDeNiveis) { // cria tela de criação de n
     }
 
     niveis.innerHTML = ` 
-        <div>
+        <div onclick='tempTest(this)'>
             Agora, decida os níveis!
         </div>
         ${divsNiveis}
@@ -214,7 +214,7 @@ function abrirCriarQuizzPerguntas(quantidaDePerguntas) { // fecha tela 3.1 abre 
     }
 
     perguntas.innerHTML = ` 
-        <div>
+        <div onclick="tempTest(this)">
             Crie suas perguntas
         </div>
         ${divsPerguntas}
@@ -334,6 +334,7 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
 
         if (!perguntaDivValida) { // se algum requisito foi descumprido
             alert(`Tem algo de errado na criação de pergunta ${i + 1}`);
+            console.log(`${textoDaPerguntaValido} ${CorDeFundoDaPerguntaValida} ${respostaCorretaValida} ${urlDaImagemValida} ${respostasIncorretasValidas} ${urlDaImagem1Valida} ${urlDaImagem2Valida} ${urlDaImagem3Valida}`);
             perguntasPreenchidasCorretamente = false;
         }
     }
@@ -421,7 +422,8 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
     }
 
     if (niveisPreenchidosCorretamente && existeAcertoMinimo0) {
-        alert("em breve tela de quizz pronto");
+        //alert("em breve tela de quizz pronto");
+        enviarQuizz()
         console.log(novoQuizz); // para testes
     } else (alert("no minimo um nivel deve conter acerto mínimo igual a 0"));
 }
@@ -442,11 +444,13 @@ function enviarQuizz() {
     const promess = axios.post(url, novoQuizz);
     promess.then(resp => {
         console.log('envio bem sucedido');
-        const tempIdQuizzes = localStorage.getItem('idQuizzes');
+        const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
         if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
-        idSeusQuizzes.push(resp.data);
+        idSeusQuizzes.push(resp.data.id);
+        localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+        voltaParaHome()
     });
-    promess.catch(resp => console.log(resp.response.status));
+    promess.catch(resp => console.log('Erro ao enviar quiz\ncode:'+resp.response.status));
 }
 
 function scrollUp() {
@@ -479,6 +483,12 @@ function voltaParaHome() {
 
     const homePage = document.querySelector('main');
     homePage.classList.remove('escondido');
+
+    const criarNiveis = document.querySelector('.criação-niveis');
+    criarNiveis.classList.add('escondido');
+    //-Rafael
+
+    pegarQuizzes()//atualizar os quizzes -Rafael
 }
 
 function respostaEscolhida(meuPalpite) {
@@ -561,6 +571,7 @@ function entrarNoQuizz(quizzIndex){
 function renderizarQuizzes(quizzes) {
     console.log(quizzes);
     todosQuizzes=quizzes;
+    idSeusQuizzes=JSON.parse(localStorage.getItem('idQuizzes'));
     const elementSeusQuizzes = document.querySelector('.seu-quizzes .container-cards');
     const elementOutrosQuizzes = document.querySelector('.outros-quizzes .container-cards');
     elementSeusQuizzes.innerHTML = '';
@@ -571,7 +582,7 @@ function renderizarQuizzes(quizzes) {
         let jaAdicionado = false;
         for (let j = 0; j < idSeusQuizzes.length; j++) {
             if (quizzes[i].id === idSeusQuizzes[j]) {
-                elementSeusQuizzes += `
+                elementSeusQuizzes.innerHTML += `
                 <div onclick="entrarNoQuizz(${i})" class="cards">
                     <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
                     <span>${quizzes[i].title}</span>
@@ -606,3 +617,35 @@ function pegarQuizzes() {
 
 pegarQuizzes()
 
+function tempTest(el){
+    if(el.innerHTML.includes('Comece pelo começo')){
+        el=el.nextElementSibling.children;
+        el[0].value=`Outro quiz a mesma cara ${idSeusQuizzes.length}`;
+        el[1].value='https://www.hypeness.com.br/1/2017/03/Phillip-Kremer-Trump-720c.jpg';
+        el[2].value=Math.floor(Math.random()*5+3);
+        el[3].value=Math.floor(Math.random()*5+2);
+    }else if(el.innerHTML.includes('Crie suas perguntas')){
+        el=el.parentNode.querySelectorAll('.perguntas-respostas');
+        for(let i=0;i<el.length;i++){
+            el[i].children[0].children[1].click();
+            el[i].children[1].value=`Titulo da pergunta ${i}`;
+            el[i].children[2].value=`#${Math.floor(Math.random()*101+100).toString(16).toUpperCase()}${Math.floor(Math.random()*101+100).toString(16).toUpperCase()}${Math.floor(Math.random()*101+100).toString(16).toUpperCase()}`;
+            el[i].children[4].value=`Resposta correta`;
+            el[i].children[5].value=`https://www.hypeness.com.br/1/2017/03/Screen-Shot-03-27-17-at-08.50-PM-001.jpg`
+            for(let j=0;j<Math.floor(Math.random()*3+1);j++){
+                el[i].children[7+j*2].value=`Resposta incorreta ${j+1}`;
+                el[i].children[8+j*2].value=`https://www.hypeness.com.br/1/2017/03/Phillip-Kremer-Trump-720d-e1490659591873.jpg`;
+            }
+        }
+    }else if(el.innerHTML.includes('Agora, decida os níveis!')){
+        el=el.parentNode.querySelectorAll('.nives-acertos');
+        for(let i=0;i<el.length;i++){
+            el[i].children[0].children[1].click();
+            el[i].children[1].value=`Titulo do nivel ${i}`;
+            el[i].children[2].value=`${Math.floor(i*80/el.length)}`;
+            el[i].children[3].value=`https://www.hypeness.com.br/1/2017/03/Phillip-Kremer-Trump-720e-e1490659598164.jpg`;
+            el[i].children[4].value=`descrição desse nivel ${i} em especifico`
+        }
+
+    }
+}
