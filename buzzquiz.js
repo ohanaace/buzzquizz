@@ -542,7 +542,7 @@ function entrarNoQuizz(quizzIndex){
         
         for(let j=0;j<tempResposta.length;j++){
             caixaResposta.innerHTML+=`
-                <div class="resposta" onclick="respostaEscolhida(this)">
+                <div class="resposta" onclick="respostaEscolhida(this,${i},${j})">
                     <img src="${tempResposta[j].image}"alt="" />
                     <p class="minha-resposta">${tempResposta[j].text}</p>
                 </div>
