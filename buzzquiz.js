@@ -2,6 +2,8 @@ const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes';
 let idSeusQuizzes = [];
 let todosQuizzes=[];
 let respostasCorretasQuizzSelecionado=[];
+let quantidadeDeAcertosDoUsuario = 0;
+let cliqueParaScroll = 0;
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -458,6 +460,8 @@ function scrollUp() {
 }
 function reiniciaQuizz() {
     scrollUp();
+    cliqueParaScroll = 0;
+    console.log(cliqueParaScroll);
     const respostasAnteriores = document.querySelectorAll('.resposta');
     for (let i = 0; i < respostasAnteriores.length; i++) {
         if (respostasAnteriores[i].classList.contains('nao-marcada')) {
@@ -478,6 +482,8 @@ function reiniciaQuizz() {
     caixaDeResultado.classList.add('escondido')
 }
 function voltaParaHome() {
+    cliqueParaScroll = 0;
+    console.log(cliqueParaScroll);
     const quizzPage = document.querySelector('.container');
     quizzPage.classList.add('escondido');
 
@@ -491,7 +497,7 @@ function voltaParaHome() {
     pegarQuizzes()//atualizar os quizzes -Rafael
 }
 
-function respostaEscolhida(meuPalpite) {
+function respostaEscolhida(meuPalpite, pergunta, resposta) {
     if(meuPalpite.classList.contains('nao-marcada') || meuPalpite.classList.contains('marcada')){
         return;
     }
