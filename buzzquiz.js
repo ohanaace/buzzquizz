@@ -497,7 +497,22 @@ function voltaParaHome() {
     pegarQuizzes()//atualizar os quizzes -Rafael
 }
 
+
+function checkRespostas(){
+    const marcadas=document.querySelectorAll('#tela2 .pergunta .marcada');
+    console.log()
+    if(marcadas.length>=document.querySelectorAll('#tela2 .pergunta').length){
+        alert('Todas as perguntas respondidas')
+    }
+}
+
+
+
 function respostaEscolhida(meuPalpite, pergunta, resposta) {
+    if(respostasCorretasQuizzSelecionado[pergunta]===resposta){
+        alert('Resposta certa');
+    }
+
     if(meuPalpite.classList.contains('nao-marcada') || meuPalpite.classList.contains('marcada')){
         return;
     }
@@ -515,6 +530,7 @@ function respostaEscolhida(meuPalpite, pergunta, resposta) {
             elementoAnalisado.classList.add('marcada');
         }
     }
+    checkRespostas()
 }
 //criado para embaralhar as respostas - Suelen
 
@@ -586,18 +602,20 @@ function renderizarQuizzes(quizzes) {
     elementOutrosQuizzes.parentNode.classList.add('escondido');
     for (let i = 0; i < quizzes.length; i++) {
         let jaAdicionado = false;
-        for (let j = 0; j < idSeusQuizzes.length; j++) {
-            if (quizzes[i].id === idSeusQuizzes[j]) {
-                elementSeusQuizzes.innerHTML += `
-                <div onclick="entrarNoQuizz(${i})" class="cards">
+        if(idSeusQuizzes!==null){
+            for (let j = 0; j < idSeusQuizzes.length; j++) {
+                if (quizzes[i].id === idSeusQuizzes[j]) {
+                    elementSeusQuizzes.innerHTML += `
+                    <div onclick="entrarNoQuizz(${i})" class="cards">
                     <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
                     <span>${quizzes[i].title}</span>
-                </div>
-                `;
-                jaAdicionado = true;
-                elementSeusQuizzes.parentNode.classList.remove('escondido');
-                document.querySelector('.criar-quiz').classList.add('escondido');
-                break;
+                    </div>
+                    `;
+                    jaAdicionado = true;
+                    elementSeusQuizzes.parentNode.classList.remove('escondido');
+                    document.querySelector('.criar-quiz').classList.add('escondido');
+                    break;
+                }
             }
         }
         if (jaAdicionado === false) {
@@ -655,3 +673,4 @@ function tempTest(el){
 
     }
 }
+
