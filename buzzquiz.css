@@ -338,6 +338,7 @@ ion-icon {
     width: 100%;
     height: 100%;
     filter: brightness(60%);
+    object-fit: cover;
 }
 .titulo-quiz {
     margin-top: 100px;

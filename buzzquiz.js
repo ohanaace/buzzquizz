@@ -1,6 +1,7 @@
 const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes';
 let idSeusQuizzes = [];
 let todosQuizzes=[];
+let respostasCorretasQuizzSelecionado=[];
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -490,7 +491,10 @@ function respostaEscolhida(meuPalpite) {
     for (let i = 0; i < respostasPossiveis.length; i++) {
         const elementoAnalisado = respostasPossiveis[i];
         elementoAnalisado.classList.add('nao-marcada');
-        if (elementoAnalisado.innerHTML === meuPalpite.innerHTML) {
+
+        //↓retirei os .innerHTML para que msm que as duas respostas sejam exatamente iguais funcione↓ -Rafael
+        //elementoAnalisado.innerHTML === meuPalpite.innerHTML
+        if (elementoAnalisado === meuPalpite) {
             elementoAnalisado.classList.remove('nao-marcada');
             elementoAnalisado.classList.add('marcada');
         }
@@ -499,9 +503,7 @@ function respostaEscolhida(meuPalpite) {
 //criado para embaralhar as respostas - Suelen
 
 //const respostasEmbaralhadas = document.querySelectorAll('.minha-resposta').sort(embaralhaRespostas);
-//function embaralhaRespostas(){
-  //  return Math.random() - 0.5;
-//}
+function embaralhaRespostas(){return Math.random() - 0.5;}; //↓usando na função entrarNoQuizz()↓
 
 
 function entrarNoQuizz(quizzIndex){
@@ -511,11 +513,49 @@ function entrarNoQuizz(quizzIndex){
     let elemento=document.querySelector('#tela2');
     elemento.classList.remove('escondido');
     elemento.querySelector('.titulo-quiz').innerHTML=quizzSelecionado.title;
-    elemento=elemento.querySelector('.pergunta');
+    elemento.querySelector('.banner img').src=quizzSelecionado.image;
+    elemento=elemento.querySelector('.quiz');
+    elemento.innerHTML='';
+    
+    for(let i=0; i<quizzSelecionado.questions.length;i++){
+        const tempPergunta=quizzSelecionado.questions[i];
+        elemento.innerHTML+=`
+            <div class="pergunta">
+                <div style="background-color: ${tempPergunta.color}" class="caixa-de-pergunta">
+                    <p class="minha-pergunta">${tempPergunta.title}</p>
+                </div>
+                <div class="caixa-de-resposta">
+                </div>
+            </div>
+        `;
+        
+        const tempResposta=tempPergunta.answers.sort(embaralhaRespostas);//embaralhar respostas
+        
+        for(let i=0;i<tempResposta.length;i++){//guardar a resposta correta em respostasCorretasQuizzSelecionado
+            if(tempResposta[i].isCorrectAnswer===true){
+                respostasCorretasQuizzSelecionado.push(i);
+                break;
+            } 
+        }
+        
+        const caixaResposta=elemento.querySelectorAll('.pergunta')[i].querySelector('.caixa-de-resposta');
+        
+        for(let j=0;j<tempResposta.length;j++){
+            caixaResposta.innerHTML+=`
+                <div class="resposta" onclick="respostaEscolhida(this)">
+                    <img src="${tempResposta[j].image}"alt="" />
+                    <p class="minha-resposta">${tempResposta[j].text}</p>
+                </div>
+            `;
+        }
+    }
+    elemento.innerHTML+=`
+        <div class="opcoes">
+            <button class="reiniciar" onclick="reiniciaQuizz()">Reiniciar Quiz</button>
+            <button class="voltar" onclick="voltaParaHome()"> Voltar para home</button>
+        </div>
+    `
 }
-
-
-
 
 
 function renderizarQuizzes(quizzes) {
