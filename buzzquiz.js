@@ -4,6 +4,7 @@ let todosQuizzes=[];
 let respostasCorretasQuizzSelecionado=[];
 let quantidadeDeAcertosDoUsuario = 0;
 let cliqueParaScroll = 0;
+let notaFinal = 0;
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -504,12 +505,19 @@ function checkRespostas(){
     const marcadas=document.querySelectorAll('#tela2 .pergunta .marcada');
     console.log()
     if(marcadas.length>=document.querySelectorAll('#tela2 .pergunta').length){
-        alert('Todas as perguntas respondidas')
+        alert('Todas as perguntas respondidas');
+        calculaResultado();
     }
 }
-
-
-
+function calculaResultado(){
+    const valorTotal = document.querySelectorAll('#tela2 .pergunta .marcada');
+    const totalDePerguntas = valorTotal.length;
+    const meusAcertos = quantidadeDeAcertosDoUsuario;
+    const minhaNota = (meusAcertos / totalDePerguntas)  * 100;
+    notaFinal = Math.round(minhaNota);
+    console.log(notaFinal);
+    alert(`Sua nota foi de ${notaFinal}%!`)
+}
 function respostaEscolhida(meuPalpite, pergunta) {
 
 
@@ -549,7 +557,7 @@ function respostaEscolhida(meuPalpite, pergunta) {
 function proximaPergunta(){
     const proximaPergunta = document.querySelector('.quiz').children;
     const scrollaParaProxima = proximaPergunta[cliqueParaScroll];
-    scrollaParaProxima.scrollIntoView()
+    scrollaParaProxima.scrollIntoView();
 }
 //criado para embaralhar as respostas - Suelen
 
