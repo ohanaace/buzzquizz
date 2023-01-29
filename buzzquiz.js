@@ -742,10 +742,12 @@ function tempTest(el){
 //só uma função para atualizar os quizzes salvos nos nossos pcs
 //dps que cada um ter executado o codigo uma vez ela ja sera desnecessaria
 function converterIdSeusQuizzes(){
-    for(let i=0;i<idSeusQuizzes.length;i++){
-        if(isNaN(idSeusQuizzes[i])===false){
-            idSeusQuizzes[i]={id: idSeusQuizzes[i], key:''};
+    if(idSeusQuizzes!==null){
+        for(let i=0;i<idSeusQuizzes.length;i++){
+            if(isNaN(idSeusQuizzes[i])===false){
+                idSeusQuizzes[i]={id: idSeusQuizzes[i], key:''};
+            }
         }
+        localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
     }
-    localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
 }
