@@ -15,21 +15,27 @@
 </head>
 
 <body>
-    <header>BuzzQuizz</header>
+    <header onclick="voltaParaHome()">BuzzQuizz</header>
     <main>
         <section class="criar-quiz">
             <span>Você não criou nenhum quizz ainda :(</span>
             <button onclick="abrirCriarQuizzInfo()">Criar Quizz</button>
         </section>
-        <section class="seu-quizzes escondido">
+        <section class="seu-quizzes">
             <div>
                 <span>Seus Quizzes</span>
                 <ion-icon onclick="abrirCriarQuizzInfo()" name="add-circle"></ion-icon>
             </div>
             <div class="container-cards">
-                <div class="cards">
-                    <img src="img/1295304.jpg" alt="">
-                    <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                <div>
+                    <div class="cards">
+                        <img src="img/1295304.jpg" alt="">
+                        <span>Quizz sobre algo muitissimo interessante imperdivel</span>
+                    </div>
+                    <div class="menu-cards">
+                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </div>
                 </div>
                 <div class="cards">
                     <span>Quizz sobre algo muitissimo interessante imperdivel</span>

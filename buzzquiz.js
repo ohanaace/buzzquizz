@@ -431,25 +431,15 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
     } else (alert("no minimo um nivel deve conter acerto mínimo igual a 0"));
 }
 
-//                            ------Bugada------
-// function erro(){//pode ter argumentos, erro('codigo do erro: 42') ou erro(42, 25)
-//     let errorTree='';
-//     let prevCaller=erro.caller;
-//     while(prevCaller!==null){
-//         errorTree+=` <= ${prevCaller.name}`;
-//         prevCaller=prevCaller.caller;
-//     }
-//     console.log(`Erro\nCaller: ${errorTree}`);
-//     console.log(Object.values(arguments));
-// }
 
 function enviarQuizz() {
     const promess = axios.post(url, novoQuizz);
     promess.then(resp => {
+        console.log(resp)
         console.log('envio bem sucedido');
         const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
         if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
-        idSeusQuizzes.push(resp.data.id);
+        idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
         localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
         voltaParaHome()
     });
@@ -616,11 +606,35 @@ function entrarNoQuizz(quizzIndex){
     `
 }
 
+function deletarQuizz(id){
+    for(let i=0;i<idSeusQuizzes.length;i++){
+        if(id===idSeusQuizzes[i].id){
+            console.log(idSeusQuizzes[i]);
+            console.log(`${idSeusQuizzes[i].key}`)
+            //axios.delete(`${url}/${id}`,{headers: {"Secret-key": idSeusQuizzes[i].key}})//n funciona, ERA UM K MAIUSCULO A DIFERENÇAAAAAAAAA
+            axios.delete(`${url}/${id}`,{headers: {"Secret-Key": idSeusQuizzes[i].key}})//funciona
+            .then(resp=>{
+                console.log('deu bom');
+                console.log(resp);
+                idSeusQuizzes.splice(i,1);
+                localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+                pegarQuizzes();
+            })
+            .catch(resp=>{
+                console.log('deu ruim');
+                console.log(resp);
+            });
+            
+            break;
+        }
+    }
+}   
 
 function renderizarQuizzes(quizzes) {
     console.log(quizzes);
     todosQuizzes=quizzes;
     idSeusQuizzes=JSON.parse(localStorage.getItem('idQuizzes'));
+    converterIdSeusQuizzes();//sera excluido
     const elementSeusQuizzes = document.querySelector('.seu-quizzes .container-cards');
     const elementOutrosQuizzes = document.querySelector('.outros-quizzes .container-cards');
     elementSeusQuizzes.innerHTML = '';
@@ -631,11 +645,17 @@ function renderizarQuizzes(quizzes) {
         let jaAdicionado = false;
         if(idSeusQuizzes!==null){
             for (let j = 0; j < idSeusQuizzes.length; j++) {
-                if (quizzes[i].id === idSeusQuizzes[j]) {
+                if (quizzes[i].id === idSeusQuizzes[j].id) {
                     elementSeusQuizzes.innerHTML += `
+                    <div>
                     <div onclick="entrarNoQuizz(${i})" class="cards">
                     <img src="${quizzes[i].image}" alt="${quizzes[i].title}">
                     <span>${quizzes[i].title}</span>
+                    </div>
+                    <div class="menu-cards">
+                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon onclick="deletarQuizz(${idSeusQuizzes[j].id})" name="trash-outline"></ion-icon>
+                    </div>
                     </div>
                     `;
                     jaAdicionado = true;
@@ -668,6 +688,8 @@ function pegarQuizzes() {
 
 pegarQuizzes()
 
+
+//criar quiz automaticamente, sera apagada na versão final (coisa de preguiçoso)
 function tempTest(el){
     if(el.innerHTML.includes('Comece pelo começo')){
         el=el.nextElementSibling.children;
@@ -701,3 +723,15 @@ function tempTest(el){
     }
 }
 
+
+
+//só uma função para atualizar os quizzes salvos nos nossos pcs
+//dps que cada um ter executado o codigo uma vez ela ja sera desnecessaria
+function converterIdSeusQuizzes(){
+    for(let i=0;i<idSeusQuizzes.length;i++){
+        if(isNaN(idSeusQuizzes[i])===false){
+            idSeusQuizzes[i]={id: idSeusQuizzes[i], key:''};
+        }
+    }
+    localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+}
