@@ -461,7 +461,8 @@ function scrollUp() {
 function reiniciaQuizz() {
     scrollUp();
     cliqueParaScroll = 0;
-    console.log(cliqueParaScroll);
+    quantidadeDeAcertosDoUsuario = 0;
+    console.log(quantidadeDeAcertosDoUsuario);
     const respostasAnteriores = document.querySelectorAll('.resposta');
     for (let i = 0; i < respostasAnteriores.length; i++) {
         if (respostasAnteriores[i].classList.contains('nao-marcada')) {
@@ -483,7 +484,8 @@ function reiniciaQuizz() {
 }
 function voltaParaHome() {
     cliqueParaScroll = 0;
-    console.log(cliqueParaScroll);
+    quantidadeDeAcertosDoUsuario = 0;
+    console.log(quantidadeDeAcertosDoUsuario);
     const quizzPage = document.querySelector('.container');
     quizzPage.classList.add('escondido');
 
@@ -508,15 +510,25 @@ function checkRespostas(){
 
 
 
-function respostaEscolhida(meuPalpite, pergunta, resposta) {
-    if(respostasCorretasQuizzSelecionado[pergunta]===resposta){
-        alert('Resposta certa');
-    }
+function respostaEscolhida(meuPalpite, pergunta) {
+
 
     if(meuPalpite.classList.contains('nao-marcada') || meuPalpite.classList.contains('marcada')){
         return;
     }
     const respostasPossiveis = meuPalpite.parentNode.children;
+    for(let i = 0; i< respostasPossiveis.length; i++){
+        if(respostasCorretasQuizzSelecionado[pergunta]===i){
+            respostasPossiveis[i].children[1].classList.add('correta');
+          }
+          else{
+            respostasPossiveis[i].children[1].classList.add('errada');
+          }
+    }
+    if(meuPalpite.children[1].classList.contains('correta')){
+        quantidadeDeAcertosDoUsuario++
+    }
+    console.log(quantidadeDeAcertosDoUsuario);
     console.log(meuPalpite);
     console.log(respostasPossiveis);
     for (let i = 0; i < respostasPossiveis.length; i++) {
@@ -530,7 +542,14 @@ function respostaEscolhida(meuPalpite, pergunta, resposta) {
             elementoAnalisado.classList.add('marcada');
         }
     }
+    cliqueParaScroll++
     checkRespostas()
+    setTimeout(proximaPergunta, 2000);
+}
+function proximaPergunta(){
+    const proximaPergunta = document.querySelector('.quiz').children;
+    const scrollaParaProxima = proximaPergunta[cliqueParaScroll];
+    scrollaParaProxima.scrollIntoView()
 }
 //criado para embaralhar as respostas - Suelen
 
