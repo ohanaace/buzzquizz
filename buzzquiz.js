@@ -433,6 +433,7 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
 
 
 function enviarQuizz() {
+    mostraLoading(true)
     const promess = axios.post(url, novoQuizz);
     promess.then(resp => {
         console.log(resp)
@@ -607,25 +608,27 @@ function entrarNoQuizz(quizzIndex){
 }
 
 function deletarQuizz(id){
-    for(let i=0;i<idSeusQuizzes.length;i++){
-        if(id===idSeusQuizzes[i].id){
-            console.log(idSeusQuizzes[i]);
-            console.log(`${idSeusQuizzes[i].key}`)
-            //axios.delete(`${url}/${id}`,{headers: {"Secret-key": idSeusQuizzes[i].key}})//n funciona, ERA UM K MAIUSCULO A DIFERENÇAAAAAAAAA
-            axios.delete(`${url}/${id}`,{headers: {"Secret-Key": idSeusQuizzes[i].key}})//funciona
-            .then(resp=>{
-                console.log('deu bom');
-                console.log(resp);
-                idSeusQuizzes.splice(i,1);
-                localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
-                pegarQuizzes();
-            })
-            .catch(resp=>{
-                console.log('deu ruim');
-                console.log(resp);
-            });
-            
-            break;
+    if(confirm('Você realmente deseja excluir este quiz?\nEsta exclusão é permanente!')){
+        mostraLoading(true);
+        for(let i=0;i<idSeusQuizzes.length;i++){
+            if(id===idSeusQuizzes[i].id){
+                console.log(idSeusQuizzes[i]);
+                console.log(`${idSeusQuizzes[i].key}`)
+                axios.delete(`${url}/${id}`,{headers: {"Secret-Key": idSeusQuizzes[i].key}})
+                .then(resp=>{
+                    mostraLoading(false);
+                    console.log('deu bom');
+                    console.log(resp);
+                    idSeusQuizzes.splice(i,1);
+                    localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+                    pegarQuizzes();
+                })
+                .catch(resp=>{
+                    console.log('deu ruim');
+                    console.log(resp);
+                });
+                break;
+            }
         }
     }
 }   
@@ -675,10 +678,13 @@ function renderizarQuizzes(quizzes) {
             elementOutrosQuizzes.parentNode.classList.remove('escondido');
         }
     }
+    if(document.querySelector('.seu-quizzes .container-cards').children.length===0) document.querySelector('.criar-quiz').classList.remove('escondido');
+    mostraLoading(false)
 }
 
 function pegarQuizzes() {
-    const promess = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+    mostraLoading(true)
+    const promess = axios.get(url);
     promess.then(resp => renderizarQuizzes(resp.data));
     promess.catch(resp => {
         console.log('Erro ao pegar quizzes');
@@ -687,6 +693,14 @@ function pegarQuizzes() {
 }
 
 pegarQuizzes()
+
+function mostraLoading(bool){
+    if(bool===true){
+        document.querySelector('.loading').classList.remove('escondido');
+    }else{
+        document.querySelector('.loading').classList.add('escondido');
+    }
+}
 
 
 //criar quiz automaticamente, sera apagada na versão final (coisa de preguiçoso)
