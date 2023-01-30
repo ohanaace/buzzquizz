@@ -195,7 +195,7 @@ function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente
     if (preenchidoCorretamente) {
         abrirCriarQuizzPerguntas(quantidadePerguntas);
         construirQuizzNiveis(quantidadeNiveis);
-        if(quizzEstaSendoEditado) editarQuizzPerguntas();
+        if(quizzEstaSendoEditado()) editarQuizzPerguntas();
     }
 }
 
@@ -660,12 +660,12 @@ function deletarQuizz(id){
 
 
 function quizzEstaSendoEditado(){
-    alert('Função ainda não implementada');
     if(JSON.stringify(quizzSendoEditado)!=='{}') return true;
     else return false;
 }
 
 function editarQuizzInfo(index,id){
+    alert('Função ainda não implementada');
     if(document.querySelector('main').classList.contains('escondido')===false){
         quizzSendoEditado=todosQuizzes[index];
         for(let i=0; i<idSeusQuizzes.length;i++){
@@ -689,13 +689,15 @@ function editarQuizzPerguntas(){
         el[i].children[0].children[1].click();
         el[i].children[1].value=quizzSendoEditado.questions[i].title;
         el[i].children[2].value=quizzSendoEditado.questions[i].color;
+        let z=0
         for(let j=0;j<quizzSendoEditado.questions[i].answers.length;j++){
             if(quizzSendoEditado.questions[i].answers[j].isCorrectAnswer===true){
                 el[i].children[4].value=quizzSendoEditado.questions[i].answers[j].text;
                 el[i].children[5].value=quizzSendoEditado.questions[i].answers[j].image;
             }else{
-                el[i].children[7+j*2].value=quizzSendoEditado.questions[i].answers[j].text;
-                el[i].children[8+j*2].value=quizzSendoEditado.questions[i].answers[j].image;
+                el[i].children[7+z*2].value=quizzSendoEditado.questions[i].answers[j].text;
+                el[i].children[8+z*2].value=quizzSendoEditado.questions[i].answers[j].image;
+                z++;
             }
         }
     }
