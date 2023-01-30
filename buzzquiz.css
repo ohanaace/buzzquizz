@@ -185,7 +185,7 @@ section>div>ion-icon {
     left: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-top: 10vh;
     background-color: #FFFFFF;
 }
 

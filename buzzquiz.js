@@ -349,6 +349,7 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
 
     if (perguntasPreenchidasCorretamente) {
         abrirCriarQuizzNiveis();
+        if(quizzEstaSendoEditado()) editarQuizzNiveis();
         console.log(novoQuizz); // deixei para testes
     }
 }
@@ -439,17 +440,30 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
 
 function enviarQuizz() {
     mostraLoading(true)
-    const promess = axios.post(url, novoQuizz);
-    promess.then(resp => {
-        console.log(resp)
-        console.log('envio bem sucedido');
-        const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
-        if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
-        idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
-        localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
-        voltaParaHome()
-    });
-    promess.catch(resp => console.log('Erro ao enviar quiz\ncode:'+resp.response.status));
+    if(quizzEstaSendoEditado()){
+        const promess = axios.put(`${url}/${quizzSendoEditado.id}`, novoQuizz,{headers: {"Secret-Key": quizzSendoEditado.key}})
+        .then(resp=>{
+            console.log(resp)
+            console.log('Edição bem sucedida');
+            const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
+            if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
+            idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
+            localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+            voltaParaHome()
+        })
+    }else{
+        const promess = axios.post(url, novoQuizz);
+        promess.then(resp => {
+            console.log(resp)
+            console.log('envio bem sucedido');
+            const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
+            if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
+            idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
+            localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+            voltaParaHome()
+        });
+        promess.catch(resp => console.log('Erro ao enviar quiz\ncode:'+resp.response.status));
+    }
 }
 
 function scrollUp() {
@@ -685,7 +699,7 @@ function editarQuizzInfo(index,id){
 
 function editarQuizzPerguntas(){
     let el=document.querySelectorAll('.perguntas-respostas');
-    for(let i=0;i<el.length;i++){
+    for(let i=0;i<quizzSendoEditado.questions.length && i<el.length ;i++){
         el[i].children[0].children[1].click();
         el[i].children[1].value=quizzSendoEditado.questions[i].title;
         el[i].children[2].value=quizzSendoEditado.questions[i].color;
@@ -703,6 +717,16 @@ function editarQuizzPerguntas(){
     }
 }
 
+function editarQuizzNiveis(){
+    let el=document.querySelectorAll('.nives-acertos')
+    for(let i=0;i<quizzSendoEditado.levels.length && i<el.length;i++){
+        el[i].children[0].children[1].click();
+        el[i].children[1].value=quizzSendoEditado.levels[i].title;
+        el[i].children[2].value=quizzSendoEditado.levels[i].minValue;
+        el[i].children[3].value=quizzSendoEditado.levels[i].image;
+        el[i].children[4].value=quizzSendoEditado.levels[i].text;
+    }
+}
 
 function renderizarQuizzes(quizzes) {
     console.log(quizzes);
