@@ -654,6 +654,10 @@ function deletarQuizz(id){
     }
 }   
 
+function editarQuizz(id){
+    alert('Função ainda não implementada');
+}
+
 function renderizarQuizzes(quizzes) {
     console.log(quizzes);
     todosQuizzes=quizzes;
@@ -677,7 +681,7 @@ function renderizarQuizzes(quizzes) {
                     <span>${quizzes[i].title}</span>
                     </div>
                     <div class="menu-cards">
-                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon onclick="editarQuizz(${idSeusQuizzes[j].id})" name="create-outline"></ion-icon>
                     <ion-icon onclick="deletarQuizz(${idSeusQuizzes[j].id})" name="trash-outline"></ion-icon>
                     </div>
                     </div>
