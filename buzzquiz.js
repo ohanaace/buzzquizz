@@ -7,6 +7,7 @@ let cliqueParaScroll = 0;
 let notaFinal = 0;
 let quizzSelecionado;
 let minhaMedia;
+let quizzSendoEditado={};
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -194,6 +195,7 @@ function criarQuizzInfo() { // verifica se inputs foram preenchidos corretamente
     if (preenchidoCorretamente) {
         abrirCriarQuizzPerguntas(quantidadePerguntas);
         construirQuizzNiveis(quantidadeNiveis);
+        if(quizzEstaSendoEditado) editarQuizzPerguntas();
     }
 }
 
@@ -225,6 +227,7 @@ function abrirCriarQuizzPerguntas(quantidaDePerguntas) { // fecha tela 3.1 abre 
         ${divsPerguntas}
         <button onclick="criarQuizzPerguntas(this)">Prosseguir pra criar niveis</button>
     ` // todo o conteudo que será exibido
+
 }
 
 function abrirInputPerguntas(ionIcon) { // abre a div exibindo inputs, ocorre na tela 3.2 - Pedro
@@ -479,6 +482,7 @@ function reiniciaQuizz() {
 function voltaParaHome() {
     cliqueParaScroll = 0;
     quantidadeDeAcertosDoUsuario = 0;
+    quizzSendoEditado={};
     console.log(quantidadeDeAcertosDoUsuario);
     const quizzPage = document.querySelector('.container');
     quizzPage.classList.add('escondido');
@@ -654,15 +658,54 @@ function deletarQuizz(id){
     }
 }   
 
-function editarQuizz(id){
-    alert('Função ainda não implementada');
+
+function quizzEstaSendoEditado(){
+    if(JSON.stringify(quizzSendoEditado)!=='{}') return true;
+    else return false;
 }
+
+function editarQuizzInfo(index,id){
+    if(document.querySelector('main').classList.contains('escondido')===false){
+        quizzSendoEditado=todosQuizzes[index];
+        for(let i=0; i<idSeusQuizzes.length;i++){
+            if(id===idSeusQuizzes[i].id){
+                quizzSendoEditado.key=idSeusQuizzes[i].key;
+                break;
+            }
+        }
+        abrirCriarQuizzInfo();
+        const inputs=document.querySelectorAll('.criação-info input');
+        inputs[0].value=quizzSendoEditado.title;
+        inputs[1].value=quizzSendoEditado.image;
+        inputs[2].value=quizzSendoEditado.questions.length;
+        inputs[3].value=quizzSendoEditado.levels.length;
+    }
+}
+
+function editarQuizzPerguntas(){
+    let el=document.querySelectorAll('.perguntas-respostas');
+    for(let i=0;i<el.length;i++){
+        el[i].children[0].children[1].click();
+        el[i].children[1].value=quizzSendoEditado.questions[i].title;
+        el[i].children[2].value=quizzSendoEditado.questions[i].color;
+        for(let j=0;j<quizzSendoEditado.questions[i].answers.length;j++){
+            if(quizzSendoEditado.questions[i].answers[j].isCorrectAnswer===true){
+                el[i].children[4].value=quizzSendoEditado.questions[i].answers[j].text;
+                el[i].children[5].value=quizzSendoEditado.questions[i].answers[j].image;
+            }else{
+                el[i].children[7+j*2].value=quizzSendoEditado.questions[i].answers[j].text;
+                el[i].children[8+j*2].value=quizzSendoEditado.questions[i].answers[j].image;
+            }
+        }
+    }
+}
+
 
 function renderizarQuizzes(quizzes) {
     console.log(quizzes);
     todosQuizzes=quizzes;
     idSeusQuizzes=JSON.parse(localStorage.getItem('idQuizzes'));
-    converterIdSeusQuizzes();//sera excluido
+    if(idSeusQuizzes===null) idSeusQuizzes=[];
     const elementSeusQuizzes = document.querySelector('.seu-quizzes .container-cards');
     const elementOutrosQuizzes = document.querySelector('.outros-quizzes .container-cards');
     elementSeusQuizzes.innerHTML = '';
@@ -681,7 +724,7 @@ function renderizarQuizzes(quizzes) {
                     <span>${quizzes[i].title}</span>
                     </div>
                     <div class="menu-cards">
-                    <ion-icon onclick="editarQuizz(${idSeusQuizzes[j].id})" name="create-outline"></ion-icon>
+                    <ion-icon onclick="editarQuizzInfo(${i},${idSeusQuizzes[j].id})" name="create-outline"></ion-icon>
                     <ion-icon onclick="deletarQuizz(${idSeusQuizzes[j].id})" name="trash-outline"></ion-icon>
                     </div>
                     </div>
@@ -703,7 +746,11 @@ function renderizarQuizzes(quizzes) {
             elementOutrosQuizzes.parentNode.classList.remove('escondido');
         }
     }
-    if(document.querySelector('.seu-quizzes .container-cards').children.length===0) document.querySelector('.criar-quiz').classList.remove('escondido');
+    if(document.querySelector('.seu-quizzes .container-cards').childElementCount===0){
+        document.querySelector('.criar-quiz').classList.remove('escondido');
+        // idSeusQuizzes=null;
+        // localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
+    }
     mostraLoading(false)
 }
 
@@ -732,7 +779,11 @@ function mostraLoading(bool){
 function tempTest(el){
     if(el.innerHTML.includes('Comece pelo começo')){
         el=el.nextElementSibling.children;
-        el[0].value=`Outro quiz a mesma cara ${idSeusQuizzes.length}`;
+        let temp=undefined;
+        if(idSeusQuizzes!==null){
+            temp=idSeusQuizzes.length
+        } else{temp=0}
+        el[0].value=`Outro quiz a mesma cara ${temp}`;
         el[1].value='https://www.hypeness.com.br/1/2017/03/Phillip-Kremer-Trump-720c.jpg';
         el[2].value=Math.floor(Math.random()*5+3);
         el[3].value=Math.floor(Math.random()*5+2);
@@ -759,20 +810,5 @@ function tempTest(el){
             el[i].children[4].value=`descrição desse nivel ${i} em especifico`
         }
 
-    }
-}
-
-
-
-//só uma função para atualizar os quizzes salvos nos nossos pcs
-//dps que cada um ter executado o codigo uma vez ela ja sera desnecessaria
-function converterIdSeusQuizzes(){
-    if(idSeusQuizzes!==null){
-        for(let i=0;i<idSeusQuizzes.length;i++){
-            if(isNaN(idSeusQuizzes[i])===false){
-                idSeusQuizzes[i]={id: idSeusQuizzes[i], key:''};
-            }
-        }
-        localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
     }
 }
