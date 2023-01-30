@@ -660,6 +660,7 @@ function deletarQuizz(id){
 
 
 function quizzEstaSendoEditado(){
+    alert('Função ainda não implementada');
     if(JSON.stringify(quizzSendoEditado)!=='{}') return true;
     else return false;
 }
