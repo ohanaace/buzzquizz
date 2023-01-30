@@ -5,6 +5,8 @@ let respostasCorretasQuizzSelecionado=[];
 let quantidadeDeAcertosDoUsuario = 0;
 let cliqueParaScroll = 0;
 let notaFinal = 0;
+let quizzSelecionado;
+let minhaMedia;
 const novoQuizz = {
     title: "Título do quizz",
     image: "https://http.cat/411.jpg",
@@ -471,8 +473,8 @@ function reiniciaQuizz() {
         }
     }
 
-    const caixaDeResultado = document.querySelector('.resultado');
-    caixaDeResultado.classList.add('escondido')
+    document.querySelector('.resultado').remove();
+    document.querySelector('.opcoes').remove();
 }
 function voltaParaHome() {
     cliqueParaScroll = 0;
@@ -494,24 +496,50 @@ function voltaParaHome() {
 
 function checkRespostas(){
     const marcadas=document.querySelectorAll('#tela2 .pergunta .marcada');
-    console.log()
     if(marcadas.length>=document.querySelectorAll('#tela2 .pergunta').length){
-        alert('Todas as perguntas respondidas');
         calculaResultado();
+        mostraResultadoNaTela();
     }
 }
 function calculaResultado(){
     const valorTotal = document.querySelectorAll('#tela2 .pergunta .marcada');
     const totalDePerguntas = valorTotal.length;
     const meusAcertos = quantidadeDeAcertosDoUsuario;
-    const minhaNota = (meusAcertos / totalDePerguntas)  * 100;
+    minhaMedia = meusAcertos / totalDePerguntas;
+    const minhaNota =  minhaMedia * 100;
     notaFinal = Math.round(minhaNota);
-    console.log(notaFinal);
-    alert(`Sua nota foi de ${notaFinal}%!`)
+}
+function mostraResultadoNaTela(){
+    const seuResultado = document.querySelector('#tela2 .quiz');
+    let meuNivel;
+    for(let i = 0; i < quizzSelecionado.levels.length; i++){
+        const tempResultado = quizzSelecionado.levels[i];
+        if(notaFinal >= Number(tempResultado.minValue) || minhaMedia >= Number(tempResultado.minValue)){
+            meuNivel = tempResultado
+        
+        }
+    }
+
+    seuResultado.innerHTML+=     ` 
+    <div class="resultado">
+        <div class="caixa-de-resultado">
+            <p class="meu-score">${notaFinal}% de acerto: ${meuNivel.title}</p>
+        </div>
+        <div class="meu-resultado">
+            <img src="${meuNivel.image}"
+                alt="" />
+            <div class="resultado-final">
+                <p class="descricao-resultado"> ${meuNivel.text}</p>
+            </div>
+        </div>
+    </div>
+    <div class="opcoes">
+        <button class="reiniciar" onclick="reiniciaQuizz()">Reiniciar Quiz</button>
+        <button class="voltar" onclick="voltaParaHome()"> Voltar para home</button>
+    </div>`
+
 }
 function respostaEscolhida(meuPalpite, pergunta) {
-
-
     if(meuPalpite.classList.contains('nao-marcada') || meuPalpite.classList.contains('marcada')){
         return;
     }
@@ -542,7 +570,7 @@ function respostaEscolhida(meuPalpite, pergunta) {
         }
     }
     cliqueParaScroll++
-    checkRespostas()
+    setTimeout(checkRespostas, 2000);
     setTimeout(proximaPergunta, 2000);
 }
 function proximaPergunta(){
@@ -557,7 +585,7 @@ function embaralhaRespostas(){return Math.random() - 0.5;}; //↓usando na funç
 
 
 function entrarNoQuizz(quizzIndex){
-    const quizzSelecionado=todosQuizzes[quizzIndex];
+    quizzSelecionado=todosQuizzes[quizzIndex];
     console.log(quizzSelecionado);
     document.querySelector('main').classList.add('escondido');
     let elemento=document.querySelector('#tela2');
@@ -599,14 +627,7 @@ function entrarNoQuizz(quizzIndex){
             `;
         }
     }
-    elemento.innerHTML+=`
-        <div class="opcoes">
-            <button class="reiniciar" onclick="reiniciaQuizz()">Reiniciar Quiz</button>
-            <button class="voltar" onclick="voltaParaHome()"> Voltar para home</button>
-        </div>
-    `
 }
-
 function deletarQuizz(id){
     if(confirm('Você realmente deseja excluir este quiz?\nEsta exclusão é permanente!')){
         mostraLoading(true);

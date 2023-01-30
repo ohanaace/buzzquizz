@@ -426,7 +426,8 @@ ion-icon {
     align-items: center;
 }
 
-.minha-pergunta {
+.minha-pergunta,
+.meu-score {
     font-weight: 700;
     font-size: 23px;
     color: #ffffff;
