@@ -679,7 +679,6 @@ function quizzEstaSendoEditado(){
 }
 
 function editarQuizzInfo(index,id){
-    alert('Função ainda não implementada');
     if(document.querySelector('main').classList.contains('escondido')===false){
         quizzSendoEditado=todosQuizzes[index];
         for(let i=0; i<idSeusQuizzes.length;i++){

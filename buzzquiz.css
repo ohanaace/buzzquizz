@@ -609,15 +609,30 @@ button:hover {
     }
 
     .pergunta {
-        height: 436px;
+        height: fit-content;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .caixa-de-pergunta{
+        height: 80px;
+    }
+
+    .caixa-de-resposta{
+        flex-direction: column;
+        align-items: center;
     }
 
     .minha-pergunta {
         font-size: 19px;
     }
 
+    .resposta{
+        width: 40vh;
+    }
+
     .minha-resposta {
-        font-size: 13px;
+        font-size: 20px;
     }
 
     .meu-resultado {
