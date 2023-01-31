@@ -350,7 +350,7 @@ function criarQuizzPerguntas(button) { // verifica se inputs foram preenchidos c
     if (perguntasPreenchidasCorretamente) {
         abrirCriarQuizzNiveis();
         if(quizzEstaSendoEditado()) editarQuizzNiveis();
-        console.log(novoQuizz); // deixei para testes
+        //console.log(novoQuizz); // deixei para testes
     }
 }
 
@@ -433,7 +433,7 @@ function finalizarQuizz(button) { // verifica se inputs foram preenchidos corret
     if (niveisPreenchidosCorretamente && existeAcertoMinimo0) {
         //alert("em breve tela de quizz pronto");
         enviarQuizz()
-        console.log(novoQuizz); // para testes
+        //console.log(novoQuizz); // para testes
     } else (alert("no minimo um nivel deve conter acerto mínimo igual a 0"));
 }
 
@@ -443,8 +443,8 @@ function enviarQuizz() {
     if(quizzEstaSendoEditado()){
         const promess = axios.put(`${url}/${quizzSendoEditado.id}`, novoQuizz,{headers: {"Secret-Key": quizzSendoEditado.key}})
         .then(resp=>{
-            console.log(resp)
-            console.log('Edição bem sucedida');
+            //console.log(resp)
+            //console.log('Edição bem sucedida');
             const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
             if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
             idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
@@ -454,8 +454,8 @@ function enviarQuizz() {
     }else{
         const promess = axios.post(url, novoQuizz);
         promess.then(resp => {
-            console.log(resp)
-            console.log('envio bem sucedido');
+            //console.log(resp)
+            //console.log('envio bem sucedido');
             const tempIdQuizzes = JSON.parse(localStorage.getItem('idQuizzes'));
             if (tempIdQuizzes !== null) idSeusQuizzes = tempIdQuizzes;
             idSeusQuizzes.push({id:resp.data.id,key:resp.data.key});
@@ -473,7 +473,7 @@ function reiniciaQuizz() {
     scrollUp();
     cliqueParaScroll = 0;
     quantidadeDeAcertosDoUsuario = 0;
-    console.log(quantidadeDeAcertosDoUsuario);
+    //console.log(quantidadeDeAcertosDoUsuario);
     const respostasAnteriores = document.querySelectorAll('.resposta');
     for (let i = 0; i < respostasAnteriores.length; i++) {
         if (respostasAnteriores[i].classList.contains('nao-marcada')) {
@@ -497,7 +497,7 @@ function voltaParaHome() {
     cliqueParaScroll = 0;
     quantidadeDeAcertosDoUsuario = 0;
     quizzSendoEditado={};
-    console.log(quantidadeDeAcertosDoUsuario);
+    //console.log(quantidadeDeAcertosDoUsuario);
     const quizzPage = document.querySelector('.container');
     quizzPage.classList.add('escondido');
 
@@ -573,9 +573,9 @@ function respostaEscolhida(meuPalpite, pergunta) {
     if(meuPalpite.children[1].classList.contains('correta')){
         quantidadeDeAcertosDoUsuario++
     }
-    console.log(quantidadeDeAcertosDoUsuario);
-    console.log(meuPalpite);
-    console.log(respostasPossiveis);
+    //console.log(quantidadeDeAcertosDoUsuario);
+    //console.log(meuPalpite);
+    //console.log(respostasPossiveis);
     for (let i = 0; i < respostasPossiveis.length; i++) {
         const elementoAnalisado = respostasPossiveis[i];
         elementoAnalisado.classList.add('nao-marcada');
@@ -604,7 +604,7 @@ function embaralhaRespostas(){return Math.random() - 0.5;}; //↓usando na funç
 
 function entrarNoQuizz(quizzIndex){
     quizzSelecionado=todosQuizzes[quizzIndex];
-    console.log(quizzSelecionado);
+    //console.log(quizzSelecionado);
     document.querySelector('main').classList.add('escondido');
     let elemento=document.querySelector('#tela2');
     elemento.classList.remove('escondido');
@@ -651,13 +651,13 @@ function deletarQuizz(id){
         mostraLoading(true);
         for(let i=0;i<idSeusQuizzes.length;i++){
             if(id===idSeusQuizzes[i].id){
-                console.log(idSeusQuizzes[i]);
-                console.log(`${idSeusQuizzes[i].key}`)
+                //console.log(idSeusQuizzes[i]);
+                //console.log(`${idSeusQuizzes[i].key}`)
                 axios.delete(`${url}/${id}`,{headers: {"Secret-Key": idSeusQuizzes[i].key}})
                 .then(resp=>{
                     mostraLoading(false);
-                    console.log('deu bom');
-                    console.log(resp);
+                    //console.log('deu bom');
+                    //console.log(resp);
                     idSeusQuizzes.splice(i,1);
                     localStorage.setItem('idQuizzes',JSON.stringify(idSeusQuizzes));
                     pegarQuizzes();
@@ -728,7 +728,7 @@ function editarQuizzNiveis(){
 }
 
 function renderizarQuizzes(quizzes) {
-    console.log(quizzes);
+    //console.log(quizzes);
     todosQuizzes=quizzes;
     idSeusQuizzes=JSON.parse(localStorage.getItem('idQuizzes'));
     if(idSeusQuizzes===null) idSeusQuizzes=[];
